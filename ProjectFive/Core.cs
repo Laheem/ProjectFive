@@ -3,17 +3,12 @@ using GTANetworkAPI;
 
 namespace ProjectFive
 {
-    public class Class1 : Script
+    public class Core : Script
     {
         [ServerEvent(Event.ResourceStart)]
         public void OnResourceStart()
         {
-            NAPI.Util.ConsoleOutput("fucking finally.");
-        }
-
-        public Class1()
-        {
-            Console.WriteLine("WOOO");
+            NAPI.Util.ConsoleOutput("[CORE] Server booted up succesfully...");
         }
     }
 }
