@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<meta>
+	<info name="ProjectFive" description="Project Five - C# Resources" type="script" />
+	<script src="ProjectFive.dll" />
+</meta>

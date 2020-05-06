@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="del &quot;C:\RAGEMP\server-files\dotnet\resources\ProjectFive\*.*&quot; /Q&#xD;&#xA;xcopy &quot;$(OutDir)*&quot; &quot;C:\RAGEMP\server-files\dotnet\resources\ProjectFive&quot; /Y&#xD;&#xA;" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="gtanetwork.api" Version="1.1.0-DP1-2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="meta.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
