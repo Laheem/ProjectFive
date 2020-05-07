@@ -38,12 +38,27 @@ namespace ProjectFive.WeaponsManager
             NAPI.ClientEvent.TriggerClientEvent(player, "weaponList");
         }
 
+        [Command("tp", Alias = "teleport", GreedyArg = true)]
+        public void TeleportToPlayer(Player player, String name)
+        {
+            Player targetPlayer = NAPI.Player.GetPlayerFromName(name);
+            if(targetPlayer == null)
+            {
+                NAPI.Chat.SendChatMessageToPlayer(player, "Looks like you typed in an invalid name.");
+                return;
+            }
+            player.Position = targetPlayer.Position;
+       
+        }
+
         [RemoteEvent("giveWeapon")]
         public void HandleWeaponSelectionEvent(Player player, object[] arguments)
         {
             String weaponName = (String) arguments[0];
             GiveWeapon(player, weaponName);
         }
+
+
 
     }
 }
