@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using GTANetworkAPI;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ProjectFive.WeaponsManager
 {
@@ -16,7 +20,7 @@ namespace ProjectFive.WeaponsManager
         } 
 
         [Command("giveweapon", Alias = "givewep")]
-        public void giveWeapon(Player player, String weaponName )
+        public void GiveWeapon(Player player, String weaponName )
         {
             WeaponHash targetWeapon = NAPI.Util.WeaponNameToModel(weaponName);
             if(targetWeapon == 0)
@@ -28,6 +32,18 @@ namespace ProjectFive.WeaponsManager
             }
         }
 
+        [Command("weapon", Alias = "wep")]
+        public void CreateWeaponList(Player player)
+        {
+            NAPI.ClientEvent.TriggerClientEvent(player, "weaponList");
+        }
+
+        [RemoteEvent("giveWeapon")]
+        public void HandleWeaponSelectionEvent(Player player, object[] arguments)
+        {
+            String weaponName = (String) arguments[0];
+            GiveWeapon(player, weaponName);
+        }
 
     }
 }
