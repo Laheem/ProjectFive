@@ -19,7 +19,6 @@
   </Target>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent"  Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))'">
-		<Exec Command="rmdir &quot;C:\RAGEMP\server-files\client_packages\cs_packages\Client&quot; /S /Q&#xD;&#xA;xcopy &quot;$(ProjectDir)Client\*&quot; &quot;C:\RAGEMP\server-files\client_packages\cs_packages&quot; /Y /e" />
 		<Exec Command="rm -rf ~/ragemp-srv/client_packages/cs_packages/Client &amp;&amp; cp $(ProjectDir)Client/* ~/ragemp-srv/client_packages/cs_packages" />
 	</Target>
 
