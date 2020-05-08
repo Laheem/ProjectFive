@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,8 +9,8 @@
 	  <Exec Command="del &quot;C:\RAGEMP\server-files\dotnet\resources\ProjectFive\*.*&quot; /Q&#xD;&#xA;xcopy &quot;$(OutDir)*&quot; &quot;C:\RAGEMP\server-files\dotnet\resources\ProjectFive&quot; /Y&#xD;&#xA;" />
   </Target>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent"  Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))'">
-		<Exec Command= "cp $(OutDir)* ~/ragemp-srv/dotnet/resources/ProjectFive/" />
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))'">
+		<Exec Command="rm -rf ~/ragemp-srv/dotnet/resources/ProjectFive &amp;&amp; cp $(OutDir)* ~/ragemp-srv/dotnet/resources/ProjectFive/" />
 	</Target>
 
   <ItemGroup>
