@@ -10,7 +10,7 @@ namespace ProjectFive.VehicleManager
 
 
         [ServerEvent(Event.ResourceStart)]
-        private void OnVehicleManagerResourceStart()
+        public void OnVehicleManagerResourceStart()
         {
             NAPI.Util.ConsoleOutput("[VEHICLE MANAGER] Vehicle Manager has successfully started!");
         }
@@ -24,7 +24,8 @@ namespace ProjectFive.VehicleManager
             {
                 NAPI.Chat.SendChatMessageToPlayer(player, "That looks like an invalid car name.");
             }
-            NAPI.Vehicle.CreateVehicle(targetVehicle, player.Position, new float(), 255, 255);
+            Vehicle x = NAPI.Vehicle.CreateVehicle(targetVehicle, player.Position, new float(), 255, 255);
+            x.EnginePowerMultiplier = 2;
         }
     }
 }
