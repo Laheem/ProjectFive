@@ -5,11 +5,14 @@
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))'">
-		<Exec Command="rm -rf ~/ragemp-srv/dotnet/resources/ProjectFive/* &amp;&amp; cp $(OutDir)* ~/ragemp-srv/dotnet/resources/ProjectFive/" />
+    
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="rm -rf ~/ragemp-srv/dotnet/resources/ProjectFive/* &amp;&amp; cp $(OutDir)* ~/ragemp-srv/dotnet/resources/ProjectFive/&#xD;&#xA;del &quot;C:\RAGEMP\server-files\dotnet\resources\ProjectFive\*.*&quot; /Q&#xD;&#xA;xcopy &quot;$(OutDir)*&quot; &quot;C:\RAGEMP\server-files\dotnet\resources\ProjectFive&quot; /Y&#xD;&#xA;" />
 	</Target>
 
-  <ItemGroup>
+
+
+	<ItemGroup>
     <PackageReference Include="gtanetwork.api" Version="1.1.0-DP1-2" />
     <PackageReference Include="MessagePack" Version="2.1.115" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
