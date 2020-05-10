@@ -4,21 +4,32 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Pomelo.EntityFrameworkCore.MySql;
+using System.Runtime.InteropServices;
+using System.IO;
+using Microsoft.Extensions.Options;
 
 namespace ProjectFive.DatabaseManager
 {
     class FiveDBContext : DbContext
     {
-        private const string connectionString = "Server=localhost;Database=projectfive;Uid=root;Pwd=toor";
+        private const string devConnectionString = "Server=localhost;Database=projectfive;Uid=root;Pwd=toor";
 
-        // Initialize a new MySQL connection with the given connection parameters 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(connectionString);
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                optionsBuilder.UseMySql(devConnectionString);
+            } else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                // TODO - CHANGE THIS ONCE YOU HAVE VAULT UP AND RUNNING.
+
+                String liveConnectionSTring = File.ReadAllText("~/constr");
+                optionsBuilder.UseMySql(liveConnectionSTring);
+            }
         }
 
 
-        // Account model class created somewhere else 
         public DbSet<Account> Accounts { get; set; }
 
     }
