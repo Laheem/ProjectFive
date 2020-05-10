@@ -27,10 +27,10 @@ namespace ProjectFive.VehicleManager
 
             NAPI.Task.Run(() =>
             {
-                Vehicle x = NAPI.Vehicle.CreateVehicle(targetVehicle, player.Position, new float(), 255, 255);
-                x.Dimension = player.Dimension;
-                x.Locked = false;
-                NAPI.Player.SetPlayerIntoVehicle(player, x, 0);
+                Vehicle createdVehicle = NAPI.Vehicle.CreateVehicle(targetVehicle, player.Position, new float(), new Color, 255);
+                createdVehicle.Dimension = NAPI.GlobalDimension;
+                createdVehicle.Locked = false;
+                NAPI.Player.SetPlayerIntoVehicle(player, createdVehicle, 0);
             });
         }
     }
