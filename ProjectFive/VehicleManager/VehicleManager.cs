@@ -23,14 +23,15 @@ namespace ProjectFive.VehicleManager
             if(targetVehicle == 0)
             {
                 NAPI.Chat.SendChatMessageToPlayer(player, "That looks like an invalid car name.");
+                return;
             }
 
             NAPI.Task.Run(() =>
             {
-                Vehicle createdVehicle = NAPI.Vehicle.CreateVehicle(targetVehicle, player.Position, new float(), 255, 255);
-                createdVehicle.Dimension = NAPI.GlobalDimension;
-                createdVehicle.Locked = false;
-                NAPI.Player.SetPlayerIntoVehicle(player, createdVehicle, 0);
+                NAPI.Chat.SendChatMessageToPlayer(player, "wtf");
+                Vehicle x = NAPI.Vehicle.CreateVehicle(targetVehicle, NAPI.Entity.GetEntityPosition(player), new float(), 255, 255);
+                NAPI.Util.ConsoleOutput(NAPI.Entity.GetEntityDimension(player).ToString() + x.Dimension);
+
             });
         }
     }

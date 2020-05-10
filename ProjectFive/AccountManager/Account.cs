@@ -1,15 +1,21 @@
-﻿using System;
+﻿using MessagePack;
+using System;
+using System.ComponentModel.DataAnnotations;
+using KeyAttribute = System.ComponentModel.DataAnnotations.KeyAttribute;
 
 namespace ProjectFive.AccountManager
 {
-    internal class Account
+     class Account
     {
-        public String SocialClubName { get; set; }
-        public bool IsAdmin { get; set; }
-        public bool IsDev { get; set; }
-        public bool IsVip { get; set; }
-        public bool IsBanned { get; set; }
+        [Key]
+        public ulong SocialClubId { get; set; }
+        public bool IsAdmin { get; set; } = false;
+        public bool IsDev { get; set; } = false;
+        public bool IsVip { get; set; } = false;
+        public bool IsBanned { get; set; } = false;
         public String Password { get; set; }
 
     }
+
+
 }
