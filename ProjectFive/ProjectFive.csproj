@@ -12,6 +12,7 @@
 
 	
     <ItemGroup>
+        <PackageReference Include="BCrypt.Net-Next" Version="4.0.0" />
         <PackageReference Include="gtanetwork.api" Version="1.1.0-DP1-2" />
         <PackageReference Include="MessagePack" Version="2.1.115" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />

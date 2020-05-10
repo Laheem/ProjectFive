@@ -1,6 +1,0 @@
-﻿enum DatabaseStatus
-{
-    ACCOUNTCREATED,
-    ACCOUNTALREADYEXISTS,
-    ERROROCCURED
-}

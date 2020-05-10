@@ -17,7 +17,7 @@ namespace ProjectFive.VehicleManager
 
 
         [Command("vehicle", Alias = "veh", GreedyArg = true)]
-        private void SpawnTargetVehicle(Player player, String vehicleName)
+        public void SpawnTargetVehicle(Player player, String vehicleName)
         {
             VehicleHash targetVehicle = NAPI.Util.VehicleNameToModel(vehicleName);
             if(targetVehicle == 0)
@@ -28,11 +28,21 @@ namespace ProjectFive.VehicleManager
 
             NAPI.Task.Run(() =>
             {
-                NAPI.Chat.SendChatMessageToPlayer(player, "wtf");
-                Vehicle x = NAPI.Vehicle.CreateVehicle(targetVehicle, NAPI.Entity.GetEntityPosition(player), new float(), 255, 255);
-                NAPI.Util.ConsoleOutput(NAPI.Entity.GetEntityDimension(player).ToString() + x.Dimension);
-
+                Vehicle x = NAPI.Vehicle.CreateVehicle(targetVehicle, player.Position, new float(), 255, 255);
+                x.Dimension = player.Dimension;
+                x.Locked = false;
+                NAPI.Entity.SetEntityPosition(x, player.Position);
+                NAPI.Player.SetPlayerIntoVehicle(player, x, 0);
+               
             });
         }
+
+        [Command("getveh")]
+        public void getVeh(Player player)
+        {
+            NAPI.Util.ConsoleOutput(NAPI.Pools.GetAllVehicles().Count.ToString());
+        }
     }
+
 }
+    
