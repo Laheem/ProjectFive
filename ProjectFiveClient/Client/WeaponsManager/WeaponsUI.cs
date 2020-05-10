@@ -1,16 +1,12 @@
-﻿using MessagePack;
-using RAGE;
-using RAGE.Game;
+﻿using RAGE;
 using RAGE.NUI;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
 using System.Drawing;
 
 namespace WeaponsManager
 {
-    class WeaponsUI : RAGE.Events.Script
+    internal class WeaponsUI : RAGE.Events.Script
     {
         private MenuPool _menuPool;
 
@@ -20,29 +16,26 @@ namespace WeaponsManager
             RAGE.Events.Add("weaponList", generateWeaponsUI);
             RAGE.Events.Tick += Tick;
 
-
-
             void generateWeaponsUI(object[] args)
             {
+                Point RIGHT_EDGE_OF_SCREEN = new Point(1400, 50);
                 _menuPool = new MenuPool();
-                UIMenu mainMenu = new UIMenu("Weapons List", "Select a type of weapon you want", new Point(900,50));
+                UIMenu mainMenu = new UIMenu("Weapons List", "Select a type of weapon you want", RIGHT_EDGE_OF_SCREEN);
+                mainMenu.FreezeAllInput = true;
 
-                UIMenu meleeMenu = _menuPool.AddSubMenu(mainMenu, "Melee", new Point(900,50));
-                UIMenu pistolMenu = _menuPool.AddSubMenu(mainMenu, "Pistols", new Point(900, 50));
-                UIMenu smgMenu = _menuPool.AddSubMenu(mainMenu, "Sub Machine Guns", new Point(900, 50));
-                UIMenu shotgunMenu = _menuPool.AddSubMenu(mainMenu, "Shotguns", new Point(900, 50));
-                UIMenu rifleMenu = _menuPool.AddSubMenu(mainMenu, "Rifles", new Point(900, 50));
-                UIMenu heavyMenu = _menuPool.AddSubMenu(mainMenu, "Heavy Weapons", new Point(900, 50));
-                UIMenu sniperMenu = _menuPool.AddSubMenu(mainMenu, "Sniper Rifles", new Point(900, 50));
-                UIMenu throwableMenu = _menuPool.AddSubMenu(mainMenu, "Throwables", new Point(900, 50));
+                UIMenu meleeMenu = _menuPool.AddSubMenu(mainMenu, "Melee", RIGHT_EDGE_OF_SCREEN);
+                UIMenu pistolMenu = _menuPool.AddSubMenu(mainMenu, "Pistols", RIGHT_EDGE_OF_SCREEN);
+                UIMenu smgMenu = _menuPool.AddSubMenu(mainMenu, "Sub Machine Guns", RIGHT_EDGE_OF_SCREEN);
+                UIMenu shotgunMenu = _menuPool.AddSubMenu(mainMenu, "Shotguns", RIGHT_EDGE_OF_SCREEN);
+                UIMenu rifleMenu = _menuPool.AddSubMenu(mainMenu, "Rifles", RIGHT_EDGE_OF_SCREEN);
+                UIMenu heavyMenu = _menuPool.AddSubMenu(mainMenu, "Heavy Weapons", RIGHT_EDGE_OF_SCREEN);
+                UIMenu sniperMenu = _menuPool.AddSubMenu(mainMenu, "Sniper Rifles", RIGHT_EDGE_OF_SCREEN);
+                UIMenu throwableMenu = _menuPool.AddSubMenu(mainMenu, "Throwables", RIGHT_EDGE_OF_SCREEN);
 
                 _menuPool.Add(mainMenu);
 
                 var bytes = RAGE.Util.MsgPack.ConvertFromJson((string)args[0]);
                 List<String> weps = RAGE.Util.MsgPack.Deserialize<List<String>>(bytes);
-
-
-         
 
                 AddWeaponButtons(ConvertJsonToList((string)args[0]), meleeMenu);
                 AddWeaponButtons(ConvertJsonToList((string)args[1]), pistolMenu);
@@ -55,22 +48,17 @@ namespace WeaponsManager
 
                 _menuPool.RefreshIndex();
                 mainMenu.Visible = true;
-
             }
-
 
             void Tick(List<Events.TickNametagData> nametags)
             {
                 _menuPool.ProcessMenus();
             }
-
         }
 
-   
-
-        void AddWeaponButtons(List<String> listOfWeapons, UIMenu targetMenu)
+        private void AddWeaponButtons(List<String> listOfWeapons, UIMenu targetMenu)
         {
-            foreach(String weapon in listOfWeapons)
+            foreach (String weapon in listOfWeapons)
             {
                 UIMenuItem weaponItem = new UIMenuItem(weapon);
                 weaponItem.Activated += WeaponItem_Activated;
@@ -87,9 +75,6 @@ namespace WeaponsManager
         {
             var bytes = RAGE.Util.MsgPack.ConvertFromJson(json);
             return RAGE.Util.MsgPack.Deserialize<List<String>>(bytes);
-
         }
     }
-
-        
 }

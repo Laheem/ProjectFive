@@ -13,7 +13,7 @@ namespace ProjectFive.WeaponsManager
     class WeaponsManager : Script
     {
         [ServerEvent(Event.ResourceStart)]
-        public void onWeaponsManagerResourceStart()
+        public void OnWeaponsManagerResourceStart()
         {
             NAPI.Util.ConsoleOutput("[WEAPONS MANAGER] Weapons Manager has booted...");
 
