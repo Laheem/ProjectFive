@@ -18,6 +18,7 @@ namespace ProjectFive.AccountManager
             NAPI.Util.ConsoleOutput("[Account Handler] Account Handler has successfully booted up!");
             using(var dbContext = new FiveDBContext())
             {
+                dbContext.Database.EnsureCreated();
                 NAPI.Util.ConsoleOutput($"There are {dbContext.Accounts.Count()} users created in the database!");
             }
         }
