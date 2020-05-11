@@ -19,8 +19,8 @@ namespace ProjectFive.AccountManager
             using(var dbContext = new FiveDBContext())
             {
                 dbContext.Database.EnsureCreated();
-                NAPI.Util.ConsoleOutput($"There are {dbContext.Accounts.Count()} users created in the database!");
-            }
+                        NAPI.Util.ConsoleOutput($"There are {dbContext.Accounts.Count()} users created in the database!");
+                    }
         }
 
 
