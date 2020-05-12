@@ -8,17 +8,20 @@ namespace ProjectFive.Utils
 {
     class LocationUtils : Script
     {
-        [Command("loc")]
-        public void getPlayerLocation(Player player, String send)
+        [Command("loc",GreedyArg = true)]
+        public void getPlayerLocation(Player player, String send, String comment = "No comment provided.")
         {
+
             NAPI.Chat.SendChatMessageToPlayer(player, player.Position.ToString());
-            
-            if(send != null && send.ToLower() == "send")
+            NAPI.Chat.SendChatMessageToPlayer(player, comment);
+
+
+            if (send != null && send.ToLower() == "send")
             {
                 using (System.IO.StreamWriter file =
                     new System.IO.StreamWriter("locations.txt", true))
                 {
-                    file.WriteLine(player.Position.ToString() + "\n");
+                    file.WriteLine($"{player.Position.ToString()} - {comment} from {player.Name}");
                 }
             }
 
