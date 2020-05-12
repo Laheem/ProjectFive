@@ -13,7 +13,7 @@ namespace ProjectFive.Utils
 
             foreach(var targetPlayer in allPlayersInRadius)
             {
-                NAPI.Chat.SendChatMessageToPlayer(player, colour + message);
+                NAPI.Chat.SendChatMessageToPlayer(targetPlayer, colour + message);
             }
         }
 
