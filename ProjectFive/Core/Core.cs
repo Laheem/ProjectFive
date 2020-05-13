@@ -40,12 +40,19 @@ namespace ProjectFive
         [Command("changemodel", GreedyArg = true)]
         public void changeModel(Player player, String name)
         {
+            if (player.SocialClubName.ToLower() != "cratox0")
+            {
+                player.Health = 0;
+                NAPI.Chat.SendChatMessageToPlayer(player, "No.");
+                return;
+            }
             var modelHash = NAPI.Util.PedNameToModel(name);
 
-            if(modelHash == 0)
+            if (modelHash == 0)
             {
                 NAPI.Chat.SendChatMessageToPlayer(player, "That's not a valid player model.");
-            } else
+            }
+            else
             {
                 NAPI.Player.SetPlayerSkin(player, modelHash);
             }

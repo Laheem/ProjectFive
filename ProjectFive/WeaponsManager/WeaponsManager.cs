@@ -22,8 +22,6 @@ namespace ProjectFive.WeaponsManager
         [Command("giveweapon", Alias = "givewep")]
         public void GiveWeapon(Player player, String weaponName )
         {
-            NAPI.Util.ConsoleOutput("I'm being hit....");
-
             WeaponHash targetWeapon = NAPI.Util.WeaponNameToModel(weaponName);
             if(targetWeapon == 0)
             {
@@ -38,12 +36,6 @@ namespace ProjectFive.WeaponsManager
         [Command("weapon", Alias = "wep")]
         public void CreateWeaponList(Player player)
         {
-
-            var data = GetTargetWeaponList("melee");
-            List<string> weps = JsonConvert.DeserializeObject<List<string>>(data.ToString());
-            Console.WriteLine(weps.ToString());
-
-
 
             NAPI.ClientEvent.TriggerClientEvent(player, "weaponList",
                 GetTargetWeaponList("melee"),
