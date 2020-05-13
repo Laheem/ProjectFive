@@ -15,7 +15,7 @@ namespace ProjectFive.ChatManager.RpCommands
        [Command("me",GreedyArg = true)]
        public void MeMessage(Player player, String message)
         {
-            String parsedMessage = $"* {player.Name} {message}.";
+            String parsedMessage = $"* {player.Name} {message}";
             ChatUtils.SendChatMessageToPlayersInRange(player, parsedMessage, colour: MeCommandColour);
         }
 
@@ -34,10 +34,10 @@ namespace ProjectFive.ChatManager.RpCommands
         {
             int outcome = new Random().Next(0, 2);
 
-            string textOutcome = "and failed";
+            string textOutcome = "failed";
             if (outcome == 0)
             {
-                textOutcome = "and succeeded";
+                textOutcome = "succeeded";
             }
 
             String parsedMessage = $"[ATTEMPT] {player.Name} has attempted to {attemptedAction} and {textOutcome}.";
