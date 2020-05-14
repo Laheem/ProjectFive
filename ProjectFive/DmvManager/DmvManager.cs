@@ -89,6 +89,8 @@ namespace ProjectFive.DmvManager
             }
         }
 
+
+        // TODO - Fix once 1.1 is patched.
         [ServerEvent(Event.VehicleDeath)]
         public void OnVehicleDeath(Vehicle vehicle)
         {
@@ -147,15 +149,16 @@ namespace ProjectFive.DmvManager
         public void startTest(Player player, Vehicle vehicle)
         {
             vehicle.Repair();
-            player.SetData<DateTime>(DMV_START_TIME_KEY, DateTime.Now);
+            player.SetData<DateTime?>(DMV_START_TIME_KEY, DateTime.Now);
             player.SetData<Vehicle>(PLAYER_DMV_VEHICLE, vehicle);
             NAPI.Chat.SendChatMessageToPlayer(player, "Your test has started, follow the checkpoints!");
             NAPI.ClientEvent.TriggerClientEvent(player, "dmvFirstCheckpoint");
+            // TODO - Fire Client events for first checkpoint here.
         }
 
         public void EndTest(Player player)
         {
-            player.SetData<String>(DMV_START_TIME_KEY, null);
+            player.SetData<DateTime?>(DMV_START_TIME_KEY, null);
             Vehicle playerDmvVehicle = player.GetData<Vehicle>(PLAYER_DMV_VEHICLE);
             playerDmvVehicle.GetData<int>(DMV_CAR_NUMBER_KEY);
             RespawnDmvVehicle(player, playerDmvVehicle);
