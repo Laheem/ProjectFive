@@ -11,7 +11,7 @@ namespace ProjectFive
             NAPI.Util.ConsoleOutput("[CORE] Server booted up succesfully...");
         }
 
-        [Command("health", GreedyArg = true, Alias = "test")]
+        [Command("health", GreedyArg = true, Alias = "hp")]
         public void giveHealth(Player player, String hp)
         {
             int hpNumber;
