@@ -1,8 +1,12 @@
 ﻿using RAGE;
+using RAGE.Elements;
+using RAGE.Game;
 using RAGE.NUI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO.Pipes;
+using Player = RAGE.Elements.Player;
 
 namespace WeaponsManager
 {
@@ -15,8 +19,9 @@ namespace WeaponsManager
             _menuPool = new MenuPool();
             RAGE.Events.Add("weaponList", generateWeaponsUI);
             RAGE.Events.Tick += Tick;
+ 
 
-            void generateWeaponsUI(object[] args)
+        void generateWeaponsUI(object[] args)
             {
                 Point RIGHT_EDGE_OF_SCREEN = new Point(1400, 50);
                 _menuPool = new MenuPool();
