@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GTANetworkAPI;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -63,6 +64,21 @@ namespace ProjectFive.ChatManager.MessageGenerator
         public static String GenerateWhisperToMessage(String targetPlayerName, String message)
         {
             return $"Whisper to {targetPlayerName}: {message}";
+        }
+
+        public static String GenerateShoutMessage(String targetPlayerName, String message)
+        {
+            return $"{targetPlayerName} shouts: {message}!";
+        }
+
+        public static String GenerateLowMessage(String targetPlayerName, String message)
+        {
+            return $"{targetPlayerName} says quietly: {message}";
+        }
+
+        public static String GenerateBMessage(String player, String message)
+        {
+            return $"(({player}: {message}))";
         }
     }
 }
