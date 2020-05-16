@@ -12,6 +12,7 @@ namespace ProjectFive.Utils
         const int WHISPER_DISTANCE = 2;
         const int GENERIC_CHAT_DISTANCE = 6;
         const int GENERIC_ROLEPLAY_COMMAND_DISTANCE = 8;
+        const int GENERIC_SHOUT_DISTANCE = 16;
         const string WHISPER_COLOUR = "!{#9D61E3}";
 
         private static void SendChatMessageToPlayersInRange(Player player, String message, double distance = GENERIC_CHAT_DISTANCE, string colour = "~w~")
@@ -95,7 +96,7 @@ namespace ProjectFive.Utils
 
         public static void SendShout(Player sender, string message)
         {
-            ChatUtils.SendChatMessageToPlayersInRange(sender, MessageGenerator.GenerateShoutMessage(sender.Name,message));
+            ChatUtils.SendChatMessageToPlayersInRange(sender, MessageGenerator.GenerateShoutMessage(sender.Name,message), distance: GENERIC_SHOUT_DISTANCE);
         }
 
         public static void SendLow(Player sender, string message, string colour)
