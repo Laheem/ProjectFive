@@ -24,8 +24,8 @@ namespace ProjectFive.DatabaseManager
             {
                 // TODO - CHANGE THIS ONCE YOU HAVE VAULT UP AND RUNNING.
 
-                String liveConnectionSTring = File.ReadAllText("~/constr");
-                optionsBuilder.UseMySql(liveConnectionSTring);
+                String liveConnectionString = File.ReadAllText("constr");
+                optionsBuilder.UseMySql(liveConnectionString);
             }
         }
 
