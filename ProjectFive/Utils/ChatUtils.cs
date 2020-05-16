@@ -9,10 +9,10 @@ namespace ProjectFive.Utils
     class ChatUtils : Script
     {
 
-        const int WHISPER_DISTANCE = 20;
+        const int WHISPER_DISTANCE = 2;
         const string WHISPER_COLOUR = "!{#9D61E3}";
 
-        public static void SendChatMessageToPlayersInRange(Player player, String message, double distance = 50, string colour = "~w~")
+        public static void SendChatMessageToPlayersInRange(Player player, String message, double distance = 5, string colour = "~w~")
         {
             List<Player> allPlayersInRadius = NAPI.Player.GetPlayersInRadiusOfPlayer(distance, player);
 
@@ -46,7 +46,7 @@ namespace ProjectFive.Utils
             if (targetPlayer != null)
             {
                 NAPI.Chat.SendChatMessageToPlayer(targetPlayer, colour + MessageGenerator.GenerateRPFromMessage(sender.Name, message));
-                NAPI.Chat.SendChatMessageToPlayer(targetPlayer, colour + MessageGenerator.GenerateRPToMessage(targetPlayerName, message));
+                NAPI.Chat.SendChatMessageToPlayer(sender, colour + MessageGenerator.GenerateRPToMessage(targetPlayerName, message));
                 return;
             }
 

@@ -63,5 +63,11 @@ namespace ProjectFive.ChatManager.RpCommands
             ChatUtils.SendWhisperToPlayerByName(player, targetName, message, WhisperCommandColour);
         }
 
+        [Command("s",GreedyArg = true)]
+        public void Whisper(Player player, string message)
+        {
+            ChatUtils.SendChatMessageToPlayersInRange(player, message, 10);
+        }
+
     }
 }
