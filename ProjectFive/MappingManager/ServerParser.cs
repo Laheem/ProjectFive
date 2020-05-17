@@ -23,28 +23,37 @@ namespace ProjectFive.MappingManager
             foreach (var file in getAllMappingFiles())
             {
                 Console.WriteLine($"Now parsing {file}");
+                List<MappingObject> newMappingObjects = new List<MappingObject>();
 
                 using (StreamReader sr = new StreamReader(file))
                 {
 
-                    
                     try
                     {
                         var mappingXML = XDocument.Parse(sr.ReadToEnd());
-                        var placementLocation = mappingXML.Element("SpoonerPlacements").Element("ReferenceCoords");
-                        var rotationVector = mappingXML.Element("SpoonerPlacements").Element("Placement").Element("PositionRotation");
-                        var hexObjectValue = mappingXML.Element("SpoonerPlacements").Element("Placement").Element("ModelHash").Value;
-                        var modelHash = Convert.ToInt32(hexObjectValue, 16);
-                        Vector3 location = new Vector3(float.Parse(placementLocation.Element("X").Value), float.Parse(placementLocation.Element("Y").Value), float.Parse(placementLocation.Element("Z").Value));
-                        Vector3 rotation = new Vector3(float.Parse(rotationVector.Element("X").Value), float.Parse(rotationVector.Element("Y").Value), float.Parse(rotationVector.Element("Z").Value));
+                        var placementLocations = mappingXML.Element("SpoonerPlacements").Elements("Placement");
+                        foreach(var placementLocation in placementLocations)
+                        {
+                            var hexObjectValue = placementLocation.Element("ModelHash").Value;
+                            var positionVector = placementLocation.Element("PositionRotation");
+                            var modelHash = Convert.ToInt32(hexObjectValue, 16);
 
 
+                            Vector3 location = new Vector3(float.Parse(positionVector.Element("X").Value), float.Parse(positionVector.Element("Y").Value), float.Parse(positionVector.Element("Z").Value));
+                            Vector3 rotation = new Vector3(float.Parse(positionVector.Element("Pitch").Value), float.Parse(positionVector.Element("Roll").Value), float.Parse(positionVector.Element("Yaw").Value));
 
-                        mappingObjects.Add(new MappingObject(location, rotation, modelHash));
+                            newMappingObjects.Add(new MappingObject(location, rotation, modelHash));
+
+
+                        }
+
+                        mappingObjects.AddRange(newMappingObjects);
+
                     }
-                    catch (IOException e)
+                    catch (Exception e)
                     {
                         Console.WriteLine($"An exception occured while parsing {file}, skipping this mapping file. {e}");
+                        break;
                     }
                 }		
 
