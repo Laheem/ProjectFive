@@ -18,11 +18,11 @@ namespace ProjectFive.MappingManager.dto
         [KeyAttribute(3)]
         public uint Dimension { get; } = 0;
         [KeyAttribute(4)]
-        public int ModelHash { get; }
+        public uint ModelHash { get; }
 
         [SerializationConstructor]
 
-        public MappingObject(Vector3 location, Vector3 rotation, int modelHash, uint dimension = 0)
+        public MappingObject(Vector3 location, Vector3 rotation, uint modelHash, uint dimension = 0)
         {
             Location = location;
             Rotation = rotation;

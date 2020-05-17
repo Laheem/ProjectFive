@@ -34,15 +34,14 @@ namespace ProjectFive.MappingManager
                         var placementLocations = mappingXML.Element("SpoonerPlacements").Elements("Placement");
                         foreach(var placementLocation in placementLocations)
                         {
-                            var hexObjectValue = placementLocation.Element("ModelHash").Value;
+                            var hashName = placementLocation.Element("HashName").Value;
                             var positionVector = placementLocation.Element("PositionRotation");
-                            var modelHash = Convert.ToInt32(hexObjectValue, 16);
 
 
                             Vector3 location = new Vector3(float.Parse(positionVector.Element("X").Value), float.Parse(positionVector.Element("Y").Value), float.Parse(positionVector.Element("Z").Value));
                             Vector3 rotation = new Vector3(float.Parse(positionVector.Element("Pitch").Value), float.Parse(positionVector.Element("Roll").Value), float.Parse(positionVector.Element("Yaw").Value));
 
-                            newMappingObjects.Add(new MappingObject(location, rotation, modelHash));
+                            newMappingObjects.Add(new MappingObject(location, rotation, NAPI.Util.GetHashKey(hashName)));
 
 
                         }
