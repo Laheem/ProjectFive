@@ -11,7 +11,6 @@ namespace ProjectFive.AccountManager
 {
     class AccountsHandler : Script
     {
-
         [ServerEvent(Event.ResourceStart)]
         public void HandleAccountHandlerStart()
         {
@@ -22,7 +21,6 @@ namespace ProjectFive.AccountManager
                         NAPI.Util.ConsoleOutput($"There are {dbContext.Accounts.Count()} users created in the database!");
                     }
         }
-
 
         [Command("signup")]
         public void CreateAccount(Player player, String password)
@@ -49,7 +47,6 @@ namespace ProjectFive.AccountManager
             LoginDatabaseStatus status;
             Account playerAccount = LoginAccount(player.SocialClubId, password, out status);
 
-
             switch (status)
             {
                 case LoginDatabaseStatus.AccountDoesntExist:
@@ -69,10 +66,8 @@ namespace ProjectFive.AccountManager
             }
         }
 
-
         public CreateDatabaseStatus createAccount(Player player, String password)
         {
-           
            using(var dbContext = new FiveDBContext())
             {
                 if(dbContext.Accounts.Find(player.SocialClubId) == null)
@@ -111,6 +106,5 @@ namespace ProjectFive.AccountManager
                 }
             }
         }
-
     }
 }

@@ -10,10 +10,6 @@
 		<PackageReference Include="rage-sharp" Version="1.1.0-DP1-2" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Client\" />
-	</ItemGroup>
-
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
 		<Exec Command="rm -rf ~/ragemp-srv/client_packages/cs_packages/Client &amp;&amp; cp -r ~/git/ProjectFive/ProjectFiveClient/Client/ ~/ragemp-srv/client_packages/cs_packages/" Condition="'$(OS)' != 'Windows_NT'" />
 		<Exec Command="rmdir &quot;C:\RAGEMP\server-files\client_packages\cs_packages\Client&quot; &#xD;&#xA;/S /Q&#xD;&#xA;xcopy &quot;$(ProjectDir)Client\*&quot; &quot;C:\RAGEMP\server-files\client_packages\cs_packages&quot; /Y /e" Condition="'$(OS)' == 'Windows_NT'" />

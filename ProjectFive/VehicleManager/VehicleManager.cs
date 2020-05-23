@@ -7,14 +7,11 @@ namespace ProjectFive.VehicleManager
 {
     class VehicleManager : Script
     {
-
-
         [ServerEvent(Event.ResourceStart)]
         public void OnVehicleManagerResourceStart()
         {
             NAPI.Util.ConsoleOutput("[VEHICLE MANAGER] Vehicle Manager has successfully started!");
         }
-
 
         [Command("vehicle", Alias = "veh", GreedyArg = true)]
         public void SpawnTargetVehicle(Player player, String vehicleName)
@@ -33,7 +30,6 @@ namespace ProjectFive.VehicleManager
                 x.Locked = false;
                 NAPI.Entity.SetEntityPosition(x, player.Position);
                 NAPI.Player.SetPlayerIntoVehicle(player, x, 0);
-               
             });
         }
 
@@ -43,6 +39,5 @@ namespace ProjectFive.VehicleManager
             NAPI.Util.ConsoleOutput(NAPI.Pools.GetAllVehicles().Count.ToString());
         }
     }
-
 }
     

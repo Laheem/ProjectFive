@@ -5,7 +5,6 @@ namespace ProjectFive
 {
     public class DebugCore : Script
     {
-
         [ServerEvent(Event.ResourceStart)]
         public void OnResourceStart()
         {
@@ -22,7 +21,6 @@ namespace ProjectFive
                 return;
             }
             player.Position = targetPlayer.Position;
-
         }
 
         [Command("health", GreedyArg = true, Alias = "test")]
@@ -87,7 +85,6 @@ namespace ProjectFive
             {
                 NAPI.Chat.SendChatMessageToPlayer(player, "USAGE: /goto x y z");
             }
-
         }
     }
 }

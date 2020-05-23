@@ -16,7 +16,6 @@ namespace ProjectFive.DatabaseManager
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 optionsBuilder.UseMySql(devConnectionString);
@@ -29,8 +28,6 @@ namespace ProjectFive.DatabaseManager
             }
         }
 
-
         public DbSet<Account> Accounts { get; set; }
-
     }
 }

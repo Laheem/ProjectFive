@@ -11,7 +11,6 @@ namespace ProjectFive.Utils
         [Command("loc",GreedyArg = true)]
         public void getPlayerLocation(Player player, String send, String comment = "No comment provided.")
         {
-
             NAPI.Chat.SendChatMessageToPlayer(player, player.Position.ToString());
     
             if (send != null && send.ToLower() == "send")
@@ -20,7 +19,6 @@ namespace ProjectFive.Utils
                     new System.IO.StreamWriter("locations.txt", true);
                 file.WriteLine($"{player.Position} - {comment} from {player.Name}");
             }
-
         }
     }
 }
