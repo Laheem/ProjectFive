@@ -38,11 +38,20 @@ namespace ProjectFiveClient.Client.Hud
             RAGE.Game.Pathfind.GetStreetNameAtCoord(localPlayer.Position.X, localPlayer.Position.Y, localPlayer.Position.Z, ref streetNameHash, ref crossingRoadHash);
             String streetNameText = RAGE.Game.Ui.GetStreetNameFromHashKey((uint)streetNameHash);
             String crossingRoadText = RAGE.Game.Ui.GetStreetNameFromHashKey((uint)crossingRoadHash);
+            String area = RAGE.Game.Zone.GetNameOfZone(localPlayer.Position.X, localPlayer.Position.Y, localPlayer.Position.Z);
 
 
+            if (crossingRoadText.Length == 0)
+            {
+                UIResText.Draw($"{streetNameText}", X_HUD_PLACEMENT_COMPASS_STREETNAMES, 970, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
 
-            UIResText.Draw(streetNameText, X_HUD_PLACEMENT_COMPASS_STREETNAMES, 970, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
-            UIResText.Draw(crossingRoadText, X_HUD_PLACEMENT_COMPASS_STREETNAMES, 1010, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
+            } else
+            {
+                UIResText.Draw($"{streetNameText} / {crossingRoadText}", X_HUD_PLACEMENT_COMPASS_STREETNAMES, 970, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
+
+            }
+
+            UIResText.Draw(area, X_HUD_PLACEMENT_COMPASS_STREETNAMES, 1010, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
             UIResText.Draw(GetCompassDirection((int) localPlayer.GetHeading()), X_HUD_PLACEMENT_COMPASS_STRING, 960, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_COMPASS, Color.White, UIResText.Alignment.Centered, true, true, 0);
 
 
