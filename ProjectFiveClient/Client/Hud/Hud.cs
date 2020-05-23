@@ -1,24 +1,21 @@
 ﻿using RAGE;
-using RAGE.Elements;
 using RAGE.Game;
 using RAGE.NUI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 
 namespace ProjectFiveClient.Client.Hud
 {
-    class Hud : RAGE.Events.Script
+    internal class Hud : RAGE.Events.Script
     {
-        RAGE.Elements.Player localPlayer = RAGE.Elements.Player.LocalPlayer;
-        const float SCALE_HUD_PLACEMENT_COMPASS = 1.6f;
-        const float SCALE_HUD_PLACEMENT_GENERIC = 0.7f;
-        const float SCALE_FACTOR_DIFFERENCE = SCALE_HUD_PLACEMENT_COMPASS - SCALE_HUD_PLACEMENT_GENERIC;
-        const int X_HUD_PLACEMENT_COMPASS_STREETNAMES = 395;
-        const int X_HUD_PLACEMENT_COMPASS_STRING = 345;
-        const int X_HUD_PLACEMENT_SCALED = (int) (X_HUD_PLACEMENT_COMPASS_STRING * SCALE_FACTOR_DIFFERENCE); 
-        
+        private RAGE.Elements.Player localPlayer = RAGE.Elements.Player.LocalPlayer;
+        private const float SCALE_HUD_PLACEMENT_COMPASS = 1.6f;
+        private const float SCALE_HUD_PLACEMENT_GENERIC = 0.7f;
+        private const float SCALE_FACTOR_DIFFERENCE = SCALE_HUD_PLACEMENT_COMPASS - SCALE_HUD_PLACEMENT_GENERIC;
+        private const int X_HUD_PLACEMENT_COMPASS_STREETNAMES = 395;
+        private const int X_HUD_PLACEMENT_COMPASS_STRING = 345;
+        private const int X_HUD_PLACEMENT_SCALED = (int)(X_HUD_PLACEMENT_COMPASS_STRING * SCALE_FACTOR_DIFFERENCE);
 
         public Hud()
         {
@@ -40,26 +37,22 @@ namespace ProjectFiveClient.Client.Hud
             String crossingRoadText = RAGE.Game.Ui.GetStreetNameFromHashKey((uint)crossingRoadHash);
             String area = RAGE.Game.Zone.GetNameOfZone(localPlayer.Position.X, localPlayer.Position.Y, localPlayer.Position.Z);
 
-
             if (crossingRoadText.Length == 0)
             {
                 UIResText.Draw($"{streetNameText}", X_HUD_PLACEMENT_COMPASS_STREETNAMES, 970, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
-
-            } else
+            }
+            else
             {
                 UIResText.Draw($"{streetNameText} / {crossingRoadText}", X_HUD_PLACEMENT_COMPASS_STREETNAMES, 970, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
-
             }
 
             UIResText.Draw(area, X_HUD_PLACEMENT_COMPASS_STREETNAMES, 1010, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
-            UIResText.Draw(GetCompassDirection((int) localPlayer.GetHeading()), X_HUD_PLACEMENT_COMPASS_STRING, 960, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_COMPASS, Color.White, UIResText.Alignment.Centered, true, true, 0);
-
-
+            UIResText.Draw(GetCompassDirection((int)localPlayer.GetHeading()), X_HUD_PLACEMENT_COMPASS_STRING, 960, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_COMPASS, Color.White, UIResText.Alignment.Centered, true, true, 0);
         }
 
-        private String GetCompassDirection(int heading) 
+        private String GetCompassDirection(int heading)
         {
-            if(heading == 0)
+            if (heading == 0)
             {
                 return "N";
             }
@@ -69,26 +62,34 @@ namespace ProjectFiveClient.Client.Hud
             {
                 case 0:
                     return "N";
+
                 case 7:
                     return "NE";
+
                 case 6:
                     return "E";
+
                 case 5:
                     return "SE";
+
                 case 4:
                     return "S";
+
                 case 3:
                     return "SW";
+
                 case 2:
                     return "W";
+
                 case 1:
                     return "NW";
+
                 case 8:
                     return "N";
+
                 default:
                     return "N";
             }
-
         }
     }
 }
