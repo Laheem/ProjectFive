@@ -12,6 +12,14 @@ namespace ProjectFiveClient.Client.Hud
     class Hud : RAGE.Events.Script
     {
         RAGE.Elements.Player localPlayer = RAGE.Elements.Player.LocalPlayer;
+        const float SCALE_HUD_PLACEMENT_COMPASS = 1.6f;
+        const float SCALE_HUD_PLACEMENT_GENERIC = 0.7f;
+        const float SCALE_FACTOR_DIFFERENCE = SCALE_HUD_PLACEMENT_COMPASS - SCALE_HUD_PLACEMENT_GENERIC;
+        const int X_HUD_PLACEMENT_COMPASS_STREETNAMES = 395;
+        const int X_HUD_PLACEMENT_COMPASS_STRING = 345;
+        const int X_HUD_PLACEMENT_SCALED = (int) (X_HUD_PLACEMENT_COMPASS_STRING * SCALE_FACTOR_DIFFERENCE); 
+        
+
         public Hud()
         {
             Events.Tick += Tick;
@@ -22,8 +30,8 @@ namespace ProjectFiveClient.Client.Hud
             if (localPlayer.Vehicle != null)
             {
                 double vehSpeed = localPlayer.Vehicle.GetSpeed() * 2.236936;
-                UIResText.Draw("Fuel: 100%", 306, 890, Font.ChaletComprimeCologne, 0.7f, Color.White, UIResText.Alignment.Left, true, true, 0);
-                UIResText.Draw($"MPH: {(int)vehSpeed}", 306, 930, Font.ChaletComprimeCologne, 0.7f, Color.White, UIResText.Alignment.Left, true, true, 0);
+                UIResText.Draw("Fuel: 100%", X_HUD_PLACEMENT_SCALED, 890, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
+                UIResText.Draw($"MPH: {(int)vehSpeed}", X_HUD_PLACEMENT_SCALED, 930, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
             }
             int streetNameHash = 0;
             int crossingRoadHash = 0;
@@ -33,9 +41,9 @@ namespace ProjectFiveClient.Client.Hud
 
 
 
-            UIResText.Draw(streetNameText, 390, 970, Font.ChaletComprimeCologne, 0.7f, Color.White, UIResText.Alignment.Left, true, true, 0);
-            UIResText.Draw(crossingRoadText, 390, 1010, Font.ChaletComprimeCologne, 0.7f, Color.White, UIResText.Alignment.Left, true, true, 0);
-            UIResText.Draw(GetCompassDirection((int) localPlayer.GetHeading()), 340, 960, Font.ChaletComprimeCologne, 1.6f, Color.White, UIResText.Alignment.Centered, true, true, 0);
+            UIResText.Draw(streetNameText, X_HUD_PLACEMENT_COMPASS_STREETNAMES, 970, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
+            UIResText.Draw(crossingRoadText, X_HUD_PLACEMENT_COMPASS_STREETNAMES, 1010, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
+            UIResText.Draw(GetCompassDirection((int) localPlayer.GetHeading()), X_HUD_PLACEMENT_COMPASS_STRING, 960, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_COMPASS, Color.White, UIResText.Alignment.Centered, true, true, 0);
 
 
         }
