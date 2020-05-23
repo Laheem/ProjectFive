@@ -5,7 +5,7 @@
 	<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)' == 'Windows_NT' ">
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="del &quot;C:\RAGEMP\server-files\dotnet\resources\ProjectFive\*.*&quot; /Q&#xD;&#xA;xcopy &quot;$(OutDir)*&quot; &quot;C:\RAGEMP\server-files\dotnet\resources\ProjectFive&quot; /Y &#xD;&#xA;" Condition="'$(OS)' == 'Windows_NT'" />
 		<Exec Command="rm -rf ~/ragemp-srv/dotnet/resources/ProjectFive &amp;&amp; cp -r ~/git/ProjectFive/ProjectFive/bin/Release/netcoreapp3.1/. ~/ragemp-srv/dotnet/resources/ProjectFive/" Condition="'$(OS)' != 'Windows_NT'" />
 	</Target>
