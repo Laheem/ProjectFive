@@ -7,7 +7,6 @@ namespace ProjectFive.ChatManager.MessageGenerator
 {
     static class MessageGenerator
     {
-
         public static String GenerateDoMessage(String playerName, String message)
         {
             return $"* {message} (({playerName}))";
@@ -29,7 +28,6 @@ namespace ProjectFive.ChatManager.MessageGenerator
             }
 
             return $"[ATTEMPT] {playerName} has attempted to {attemptedAction} and {textOutcome}.";
-
         }
 
         public static String GenerateFromPm(String senderName, string message) {

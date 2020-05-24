@@ -14,8 +14,5 @@ namespace ProjectFive.AccountManager
         public bool IsVip { get; set; } = false;
         public bool IsBanned { get; set; } = false;
         public String Password { get; set; }
-
     }
-
-
 }

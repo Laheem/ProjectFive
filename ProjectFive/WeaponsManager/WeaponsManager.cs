@@ -16,7 +16,6 @@ namespace ProjectFive.WeaponsManager
         public void OnWeaponsManagerResourceStart()
         {
             NAPI.Util.ConsoleOutput("[WEAPONS MANAGER] Weapons Manager has booted...");
-
         } 
 
         [Command("giveweapon", Alias = "givewep")]
@@ -32,11 +31,9 @@ namespace ProjectFive.WeaponsManager
             }
         }
 
-
         [Command("weapon", Alias = "wep")]
         public void CreateWeaponList(Player player)
         {
-
             NAPI.ClientEvent.TriggerClientEvent(player, "weaponList",
                 GetTargetWeaponList("melee"),
                 GetTargetWeaponList("handguns"),
@@ -49,16 +46,12 @@ namespace ProjectFive.WeaponsManager
                 );
         }
 
-
         [RemoteEvent("giveWeapon")]
         public void HandleWeaponSelectionEvent(Player player, object[] arguments)
         {
             String weaponName = (String) arguments[0];
             GiveWeapon(player, weaponName);
         }
-
-
-
 
         String GetTargetWeaponList(string weaponName)
         {
@@ -76,9 +69,6 @@ namespace ProjectFive.WeaponsManager
 
                 return NAPI.Util.ToJson(allWeaponNames);
             }
-
         }
-
-
     }
 }

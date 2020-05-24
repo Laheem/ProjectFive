@@ -5,7 +5,6 @@ namespace ProjectFive
 {
     public class DebugCore : Script
     {
-
         [ServerEvent(Event.ResourceStart)]
         public void OnResourceStart()
         {
@@ -22,7 +21,6 @@ namespace ProjectFive
                 return;
             }
             player.Position = targetPlayer.Position;
-
         }
 
         [Command("health", GreedyArg = true, Alias = "test")]
@@ -69,6 +67,23 @@ namespace ProjectFive
             else
             {
                 NAPI.Player.SetPlayerSkin(player, modelHash);
+            }
+        }
+
+        [Command("goto", GreedyArg = true)]
+        public void Teleport(Player player, String xLoc, String yLoc, String zLoc)
+        {
+            double x;
+            double y;
+            double z;
+
+            if (double.TryParse(xLoc, out x) && double.TryParse(yLoc, out y) && double.TryParse(zLoc, out z))
+            {
+                player.Position = new Vector3(x, y, z);
+            }
+            else
+            {
+                NAPI.Chat.SendChatMessageToPlayer(player, "USAGE: /goto x y z");
             }
         }
     }

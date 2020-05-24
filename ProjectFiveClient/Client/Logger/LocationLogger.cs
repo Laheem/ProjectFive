@@ -14,7 +14,6 @@ namespace ProjectFiveClient.Client.Logger
 
         private void PrintToLocationFile(object[] args)
         {
-            
         }
     }
 }

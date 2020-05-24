@@ -8,7 +8,6 @@ namespace ProjectFive.Utils
 {
     class ChatUtils : Script
     {
-
         const int WHISPER_DISTANCE = 2;
         const int GENERIC_CHAT_DISTANCE = 6;
         const int GENERIC_ROLEPLAY_COMMAND_DISTANCE = 8;
@@ -39,7 +38,6 @@ namespace ProjectFive.Utils
         {
             SendChatMessageToPlayersInRange(player, MessageGenerator.GenerateAttemptMessage(player.Name, action), distance: GENERIC_ROLEPLAY_COMMAND_DISTANCE, colour: colour);
         }
-
 
         public static void SendChatMessageToPlayerById(Player sender, int targetPlayerId, string colour = "~w~")
         {
@@ -90,9 +88,7 @@ namespace ProjectFive.Utils
             }
 
             NAPI.Chat.SendChatMessageToPlayer(sender, "That player doesn't exist or is offline.");
-
         }
-
 
         public static void SendShout(Player sender, string message)
         {

@@ -6,15 +6,12 @@ namespace ProjectFive.ChatManager.RpCommands
 {
     internal class RoleplayCommands : Script
     {
-
         public const string GENERIC_RP_COLOUR = "!{#cc66ff}";
         public const string PM_COMMAND_COLOUR = "!{#F7FD00}";
         public const string WHISPER_COMMAND_COLOUR = "!{#F7FD00}";
         public const string RP_COMMAND_COLOUR = "!{#D858CB}";
         public const string LOW_COMMAND_COLOUR = "!{#7CE1F0}";
         public const string B_COMMAND_COLOUR = "!{#ABAAAA}";
-
-
 
         // TODO - Change this to character when we get around to it.
         [Command("me", GreedyArg = true)]
@@ -35,13 +32,11 @@ namespace ProjectFive.ChatManager.RpCommands
             ChatUtils.SendAttemptMessage(player, attemptedAction, GENERIC_RP_COLOUR);
         }
 
-
         [Command("pm", GreedyArg = true)]
         public void PmPlayer(Player player, String targetName, string message)
         {
             ChatUtils.SendPrivateMessageToPlayerByName(player, targetName, message, PM_COMMAND_COLOUR);
         }
-
 
         [Command("rp", GreedyArg = true)]
         public void RpMessage(Player player, String targetName, string message)
@@ -72,6 +67,5 @@ namespace ProjectFive.ChatManager.RpCommands
         {
             ChatUtils.SendB(player, message, B_COMMAND_COLOUR);
         }
-
     }
 }
