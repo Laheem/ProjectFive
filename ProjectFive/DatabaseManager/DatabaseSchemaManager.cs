@@ -1,4 +1,5 @@
 ﻿using GTANetworkAPI;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace ProjectFive.DatabaseManager
 
             using (var dbContext = new FiveDBContext())
             {
-                dbContext.Database.EnsureCreated();
+                dbContext.Database.Migrate();
                 NAPI.Util.ConsoleOutput($"There are {dbContext.Accounts.Count()} accounts created in the database!");
             }
 

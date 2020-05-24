@@ -12,13 +12,21 @@ namespace ProjectFive.DatabaseManager
         public CreateDatabaseStatus CreateAccount(ulong socialClubId, String password)
         {
             Task<int> accountCreateTask = accountRepo.CreateAccount(socialClubId, password);
-            accountCreateTask.Wait(TimeSpan.FromSeconds(20));
+            try
+            {
+                accountCreateTask.Wait(TimeSpan.FromSeconds(20));
+
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+                return CreateDatabaseStatus.ErrorOccured;
+            }
 
             if (accountCreateTask.IsCompleted)
             {
                 return CreateDatabaseStatus.AccountCreated;
-            }
-            else
+            } else
             {
                 return CreateDatabaseStatus.ErrorOccured;
             }
@@ -28,20 +36,28 @@ namespace ProjectFive.DatabaseManager
         {
             Task<Account> accountTask = accountRepo.GetAccountBySocialClubId(socialClubID);
 
-            accountTask.Wait(TimeSpan.FromSeconds(20));
-
-            if (accountTask.IsCompleted)
+            try
             {
-                if (BCrypt.Net.BCrypt.Verify(password, accountTask.Result.Password))
-                {
-                    status = LoginDatabaseStatus.Success;
-                    return accountTask.Result;
-                }
+                accountTask.Wait(TimeSpan.FromSeconds(20));
 
-                status = LoginDatabaseStatus.IncorrectPassword;
-                return null;
+                if (accountTask.IsCompleted)
+                {
+                    if (BCrypt.Net.BCrypt.Verify(password, accountTask.Result.Password))
+                    {
+                        status = LoginDatabaseStatus.Success;
+                        return accountTask.Result;
+                    }
+
+                    status = LoginDatabaseStatus.IncorrectPassword;
+                    return null;
+                }
+                else
+                {
+                    status = LoginDatabaseStatus.UnknownError;
+                    return null;
+                }
             }
-            else
+            catch (Exception)
             {
                 status = LoginDatabaseStatus.UnknownError;
                 return null;
