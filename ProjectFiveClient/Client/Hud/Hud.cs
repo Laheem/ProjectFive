@@ -37,8 +37,16 @@ namespace ProjectFiveClient.Client.Hud
             RAGE.Game.Pathfind.GetStreetNameAtCoord(localPlayer.Position.X, localPlayer.Position.Y, localPlayer.Position.Z, ref streetNameHash, ref crossingRoadHash);
             String streetNameText = RAGE.Game.Ui.GetStreetNameFromHashKey((uint)streetNameHash);
             String crossingRoadText = RAGE.Game.Ui.GetStreetNameFromHashKey((uint)crossingRoadHash);
-            String area;
-            fullZoneNames.TryGetValue(RAGE.Game.Zone.GetNameOfZone(localPlayer.Position.X, localPlayer.Position.Y, localPlayer.Position.Z), out area);
+            if (fullZoneNames.TryGetValue(RAGE.Game.Zone.GetNameOfZone(localPlayer.Position.X, localPlayer.Position.Y, localPlayer.Position.Z), out string area))
+            {
+                UIResText.Draw(area, X_HUD_PLACEMENT_COMPASS_STREETNAMES, 1010, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
+            }
+            else
+            {
+                UIResText.Draw(RAGE.Game.Zone.GetNameOfZone(localPlayer.Position.X, localPlayer.Position.Y, localPlayer.Position.Z), X_HUD_PLACEMENT_COMPASS_STREETNAMES, 1010, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
+
+            }
+
 
             if (crossingRoadText.Length == 0)
             {
@@ -49,7 +57,6 @@ namespace ProjectFiveClient.Client.Hud
                 UIResText.Draw($"{streetNameText} / {crossingRoadText}", X_HUD_PLACEMENT_COMPASS_STREETNAMES, 970, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
             }
 
-            UIResText.Draw(area, X_HUD_PLACEMENT_COMPASS_STREETNAMES, 1010, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_GENERIC, Color.White, UIResText.Alignment.Left, true, true, 0);
             UIResText.Draw(GetCompassDirection((int)localPlayer.GetHeading()), X_HUD_PLACEMENT_COMPASS_STRING, 960, Font.ChaletComprimeCologne, SCALE_HUD_PLACEMENT_COMPASS, Color.White, UIResText.Alignment.Centered, true, true, 0);
         }
 
@@ -61,38 +68,19 @@ namespace ProjectFiveClient.Client.Hud
             }
             int headingAngle = heading / 45;
 
-            switch (headingAngle)
+            return headingAngle switch
             {
-                case 0:
-                    return "N";
-
-                case 7:
-                    return "NE";
-
-                case 6:
-                    return "E";
-
-                case 5:
-                    return "SE";
-
-                case 4:
-                    return "S";
-
-                case 3:
-                    return "SW";
-
-                case 2:
-                    return "W";
-
-                case 1:
-                    return "NW";
-
-                case 8:
-                    return "N";
-
-                default:
-                    return "N";
-            }
+                0 => "N",
+                7 => "NE",
+                6 => "E",
+                5 => "SE",
+                4 => "S",
+                3 => "SW",
+                2 => "W",
+                1 => "NW",
+                8 => "N",
+                _ => "N",
+            };
         }
             private Dictionary<String,String> GenerateFullZoneDictionary()
             {
@@ -153,6 +141,7 @@ namespace ProjectFiveClient.Client.Hud
                 fullZoneNames.Add("NCHU", "North Chumash");
                 fullZoneNames.Add("NOOSE", "N.O.O.S.E");
                 fullZoneNames.Add("OCEANA", "Pacific Ocean");
+                fullZoneNames.Add("OBSERV", "Galileo Observatory");
                 fullZoneNames.Add("PALCOV", "Paleto Cove");
                 fullZoneNames.Add("PALETO", "Paleto Bay");
                 fullZoneNames.Add("PALFOR", "Paleto Forest");
