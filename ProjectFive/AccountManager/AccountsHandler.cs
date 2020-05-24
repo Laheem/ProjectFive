@@ -11,41 +11,25 @@ namespace ProjectFive.AccountManager
 {
     class AccountsHandler : Script
     {
-        [ServerEvent(Event.ResourceStart)]
-        public void HandleAccountHandlerStart()
-        {
-            NAPI.Util.ConsoleOutput("[Account Handler] Account Handler has successfully booted up!");
-            using(var dbContext = new FiveDBContext())
-            {
-                dbContext.Database.EnsureCreated();
-                        NAPI.Util.ConsoleOutput($"There are {dbContext.Accounts.Count()} users created in the database!");
-                    }
-        }
+        readonly AccountService accountService = new AccountService();
 
         [Command("signup")]
         public void CreateAccount(Player player, String password)
         {
-            CreateDatabaseStatus returnedResult = createAccount(player, password);
-
-            switch (returnedResult)
+          var status = accountService.CreateAccount(player.SocialClubId, password);
+          if(status == CreateDatabaseStatus.AccountCreated)
             {
-                case CreateDatabaseStatus.AccountCreated:
-                    NAPI.Chat.SendChatMessageToPlayer(player, "Succesfully created your account!");
-                    return;
-                case CreateDatabaseStatus.AccountAlreadyExists:
-                    NAPI.Chat.SendChatMessageToPlayer(player, "Looks like your account already exists...");
-                    return;
-                default:
-                    NAPI.Chat.SendChatMessageToPlayer(player, "An unknown error occured.");
-                    return;
+                NAPI.Chat.SendChatMessageToPlayer(player,"Your account was succesfully created.");
+            } else
+            {
+                NAPI.Chat.SendChatMessageToPlayer(player, "An unknown error occured...");
             }
         }
 
         [Command("login",SensitiveInfo = true)]
         public void LoginUser(Player player, String password)
         {
-            LoginDatabaseStatus status;
-            Account playerAccount = LoginAccount(player.SocialClubId, password, out status);
+            Account playerAccount = accountService.LoginAccount(player.SocialClubId, password, out LoginDatabaseStatus status);
 
             switch (status)
             {
@@ -60,8 +44,6 @@ namespace ProjectFive.AccountManager
                     break;
                 case LoginDatabaseStatus.UnknownError:
                     NAPI.Chat.SendChatMessageToPlayer(player, "An unknown error occured.");
-                    break;
-                default:
                     break;
             }
         }
