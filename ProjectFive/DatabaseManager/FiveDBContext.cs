@@ -29,6 +29,17 @@ namespace ProjectFive.DatabaseManager
             }
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Account>()
+                .Property(acc => acc.VipLevel)
+                .HasDefaultValue(0);
+            modelBuilder.Entity<Account>()
+                .Property(acc => acc.VipTokens)
+                .HasDefaultValue(0);
+        }
+
+
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Character> Characters { get; set; }
     }

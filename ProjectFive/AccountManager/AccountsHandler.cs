@@ -22,6 +22,7 @@ namespace ProjectFive.AccountManager
                 SocialClubId = player.SocialClubId,
                 SocialClubName = player.SocialClubName
             };
+
           var status = accountService.CreateAccount(newAccount);
           if(status == CreateDatabaseStatus.AccountCreated)
             {
