@@ -9,16 +9,15 @@ namespace ProjectFive.DatabaseManager.Repository
 {
     class AccountRepository
     {
-        public async Task<int> CreateAccount(ulong socialClubId, String password)
+        public async Task<int> CreateAccount(Account account)
         {
             try
             {
                 using var dbContext = new FiveDBContext();
-                var databaseAccount = await dbContext.Accounts.FindAsync(socialClubId).ConfigureAwait(false);
+                var databaseAccount = await dbContext.Accounts.FindAsync(account.SocialClubId).ConfigureAwait(false);
                 if (databaseAccount == default)
                 {
-                    Account newPlayerAccount = new Account { SocialClubId = socialClubId, Password = BCrypt.Net.BCrypt.HashPassword(password) };
-                    dbContext.Accounts.Add(newPlayerAccount);
+                    dbContext.Accounts.Add(account);
                     return await dbContext.SaveChangesAsync().ConfigureAwait(false);
                     
                 }

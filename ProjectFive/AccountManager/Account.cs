@@ -21,7 +21,16 @@ namespace ProjectFive.AccountManager
         public int VipLevel { get; set; }
         public DateTime? VipExpiration { get; set; }
         public int VipTokens { get; set; }
-        public String test { get; set; }
+        public String SocialClubName { get; set; }
 
+
+        public String getRemainingDaysOfVip()
+        {
+            if(VipExpiration == null)
+            {
+                return "0 Days";
+            }
+            return (VipExpiration.Value.Date - DateTime.Now.Date).Days.ToString() + " Days";
+        }
     }
 }

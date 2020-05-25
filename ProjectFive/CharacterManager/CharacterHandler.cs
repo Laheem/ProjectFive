@@ -78,11 +78,33 @@ namespace ProjectFive.CharacterManager
             }
         }
 
+        [Command("stats")]
+        public void GetCharacterStats(Player player)
+        {
+            if (characterEntityService.HasSelectedCharacter(player))
+            {
+                GenerateStatsPage(player, characterEntityService.GetCharacter(player));
+            }
+        }
+
 
         private bool ValidateCharacterName(String characterName)
         {
             Regex regex = new Regex("[A-Z]{1}[a-z]{1,}_[A-Z]{1}[a-z]{1,}");
             return regex.IsMatch(characterName);
+        }
+
+
+        private void GenerateStatsPage(Player player,Character character)
+        {
+            Account playerAccount = player.GetData<Account>(DataKeys.ACCOUNT_KEY);
+            NAPI.Chat.SendChatMessageToPlayer(player, new string('-', 90));
+            NAPI.Chat.SendChatMessageToPlayer(player, $"{character.CharacterName} | Age: {character.Age} | Race: Placeholder | Money: ${character.Money} | Bank Money: $3");
+            NAPI.Chat.SendChatMessageToPlayer(player, "Job: Placeholder | Faction: Vimto Syndacrips | Rank: Original Fizzy (10)");
+            NAPI.Chat.SendChatMessageToPlayer(player, "Houses: None | Businesses: 23, 222");
+            NAPI.Chat.SendChatMessageToPlayer(player, $"Playing Hours : {character.PlayingHours} | Rank: very cool | VIP: {playerAccount.VipLevel} | VIP Expiration : {playerAccount.getRemainingDaysOfVip()}");
+            NAPI.Chat.SendChatMessageToPlayer(player, new string('-', 90));
+
         }
     }
 }

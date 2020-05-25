@@ -17,7 +17,12 @@ namespace ProjectFive.AccountManager
         [Command("signup")]
         public void CreateAccount(Player player, String password)
         {
-          var status = accountService.CreateAccount(player.SocialClubId, password);
+            Account newAccount = new Account {
+                Password = BCrypt.Net.BCrypt.HashPassword(password),
+                SocialClubId = player.SocialClubId,
+                SocialClubName = player.SocialClubName
+            };
+          var status = accountService.CreateAccount(newAccount);
           if(status == CreateDatabaseStatus.AccountCreated)
             {
                 NAPI.Chat.SendChatMessageToPlayer(player,"Your account was succesfully created.");
@@ -38,7 +43,7 @@ namespace ProjectFive.AccountManager
                     NAPI.Chat.SendChatMessageToPlayer(player, "That account doesn't exist.");
                     break;
                 case LoginDatabaseStatus.Success:
-                    NAPI.Chat.SendChatMessageToPlayer(player, $"Account logged in, welcome back {playerAccount.SocialClubId}");
+                    NAPI.Chat.SendChatMessageToPlayer(player, $"Account logged in, welcome back {playerAccount.SocialClubName}!");
                     player.SetData<Account>(DataKeys.ACCOUNT_KEY, playerAccount);
                     break;
                 case LoginDatabaseStatus.IncorrectPassword:

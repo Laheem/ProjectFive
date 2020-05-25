@@ -9,9 +9,9 @@ namespace ProjectFive.DatabaseManager
     {
         private readonly AccountRepository accountRepo = new AccountRepository();
 
-        public CreateDatabaseStatus CreateAccount(ulong socialClubId, String password)
+        public CreateDatabaseStatus CreateAccount(Account account)
         {
-            Task<int> accountCreateTask = accountRepo.CreateAccount(socialClubId, password);
+            Task<int> accountCreateTask = accountRepo.CreateAccount(account);
             try
             {
                 accountCreateTask.Wait(TimeSpan.FromSeconds(20));
