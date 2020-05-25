@@ -26,7 +26,7 @@ namespace ProjectFive.CharacterManager
         [Command("createcharacter", GreedyArg = true)]
         public void CreateCharacter(Player player, String name)
         {
-            if (characterEntityService.HasSelectedCharacter(player))
+            if (player.HasData(DataKeys.ACCOUNT_KEY))
             {
                 Account playerAccount = player.GetData<Account>(DataKeys.ACCOUNT_KEY);
                 try
