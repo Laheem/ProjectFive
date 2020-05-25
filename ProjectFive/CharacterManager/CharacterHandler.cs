@@ -1,5 +1,7 @@
 ﻿using GTANetworkAPI;
 using ProjectFive.AccountManager;
+using ProjectFive.CharacterManager.Dto;
+using ProjectFive.CharacterManager.Service;
 using ProjectFive.DatabaseManager.Service;
 using ProjectFive.Utils;
 using System;
@@ -11,12 +13,20 @@ namespace ProjectFive.CharacterManager
     internal class CharacterHandler : Script
     {
         private CharacterService characterService = new CharacterService();
+        private CharacterEntityService characterEntityService = new CharacterEntityService();
 
+        public event EventHandler CharacterLoggedIn;
+
+        protected virtual void OnCharacterLoggedIn(CharacterLogInArgs e)
+        {
+            EventHandler handler = CharacterLoggedIn;
+            handler?.Invoke(this, e);
+        }
 
         [Command("createcharacter", GreedyArg = true)]
         public void CreateCharacter(Player player, String name)
         {
-            if (player.HasData(DataKeys.ACCOUNT_KEY))
+            if (characterEntityService.HasSelectedCharacter(player))
             {
                 Account playerAccount = player.GetData<Account>(DataKeys.ACCOUNT_KEY);
                 try
@@ -26,6 +36,8 @@ namespace ProjectFive.CharacterManager
                         Character newPlayerChar = new Character { CharacterName = name, AccountSocialClubId = playerAccount.SocialClubId, Age = 23, Gender = "M" };
                         characterService.CreateCharacter(newPlayerChar);
                         NAPI.Chat.SendChatMessageToPlayer(player, $"Character created! You are now playing as {newPlayerChar.CharacterName}");
+                        OnCharacterLoggedIn(new CharacterLogInArgs(player, newPlayerChar, playerAccount));
+                        characterEntityService.SetCurrentCharacter(player, newPlayerChar);
                     }
                     else
                     {
@@ -51,9 +63,10 @@ namespace ProjectFive.CharacterManager
                 try
                 {
                     List<Character> allCharacters = characterService.GetAllCharacters(playerAccount);
-                    Character chosenChar = allCharacters[selectedIndex - 1];
-                    player.SetData<Character>(DataKeys.CHARACTER_KEY, chosenChar);
-                    NAPI.Chat.SendChatMessageToPlayer(player, $"You've selected {chosenChar.CharacterName}");
+                    Character chosenCharacter = allCharacters[selectedIndex - 1];
+                    characterEntityService.SetCurrentCharacter(player, chosenCharacter);
+                    NAPI.Chat.SendChatMessageToPlayer(player, $"You've selected {chosenCharacter.CharacterName}");
+                    OnCharacterLoggedIn(new CharacterLogInArgs(player, chosenCharacter, playerAccount));
                 }
                 catch
                 {

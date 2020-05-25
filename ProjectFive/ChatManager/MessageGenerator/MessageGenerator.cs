@@ -7,6 +7,11 @@ namespace ProjectFive.ChatManager.MessageGenerator
 {
     static class MessageGenerator
     {
+
+        public static String GenerateGenericMessage(String characterName, String message)
+        {
+            return $"{characterName} says: {message}";
+        }
         public static String GenerateDoMessage(String playerName, String message)
         {
             return $"* {message} (({playerName}))";

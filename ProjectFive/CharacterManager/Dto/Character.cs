@@ -18,5 +18,10 @@ namespace ProjectFive.CharacterManager
         public int PlayingHours { get; set; }
         public long Money { get; set; }
         public ulong AccountSocialClubId { get; set; }
+
+        public String GetDisplayName()
+        {
+            return this.CharacterName.Replace("_", " ");
+        }
     }
 }
