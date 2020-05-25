@@ -34,7 +34,8 @@ namespace ProjectFiveClient.Client.Hud
             }
             int streetNameHash = 0;
             int crossingRoadHash = 0;
-            RAGE.Game.Pathfind.GetStreetNameAtCoord(localPlayer.Position.X, localPlayer.Position.Y, localPlayer.Position.Z, ref streetNameHash, ref crossingRoadHash);
+            var currentLocation = localPlayer.Position;
+            RAGE.Game.Pathfind.GetStreetNameAtCoord(currentLocation.X, currentLocation.Y, currentLocation.Z, ref streetNameHash, ref crossingRoadHash);
             String streetNameText = RAGE.Game.Ui.GetStreetNameFromHashKey((uint)streetNameHash);
             String crossingRoadText = RAGE.Game.Ui.GetStreetNameFromHashKey((uint)crossingRoadHash);
             if (fullZoneNames.TryGetValue(RAGE.Game.Zone.GetNameOfZone(localPlayer.Position.X, localPlayer.Position.Y, localPlayer.Position.Z), out string area))
