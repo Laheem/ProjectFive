@@ -22,11 +22,11 @@ namespace ProjectFive.DatabaseManager.Repository
                     
                 }
 
-                return 0;
+                return -1;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw new Exception("An error has occured within CreateAccount. " + e.Message);
             }
 
         }
@@ -43,9 +43,9 @@ namespace ProjectFive.DatabaseManager.Repository
                 }
                 return 0;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw new Exception("An error has occured within UpdateAccount. " + e.Message);
             }
         }
 

@@ -23,13 +23,17 @@ namespace ProjectFive.AccountManager
                 SocialClubName = player.SocialClubName
             };
 
-          var status = accountService.CreateAccount(newAccount);
-          if(status == CreateDatabaseStatus.AccountCreated)
+            switch (accountService.CreateAccount(newAccount))
             {
-                NAPI.Chat.SendChatMessageToPlayer(player,"Your account was succesfully created.");
-            } else
-            {
-                NAPI.Chat.SendChatMessageToPlayer(player, "An unknown error occured...");
+                case CreateDatabaseStatus.AccountCreated:
+                    NAPI.Chat.SendChatMessageToPlayer(player, "Your account was succesfully created.");
+                    break;
+                case CreateDatabaseStatus.AccountAlreadyExists:
+                    NAPI.Chat.SendChatMessageToPlayer(player, "You already have an account here!");
+                    break;
+                default:
+                    NAPI.Chat.SendChatMessageToPlayer(player, "An unknown error occured...");
+                    break;
             }
         }
 

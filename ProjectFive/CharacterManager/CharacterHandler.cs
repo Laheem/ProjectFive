@@ -31,7 +31,12 @@ namespace ProjectFive.CharacterManager
                 Account playerAccount = player.GetData<Account>(DataKeys.ACCOUNT_KEY);
                 try
                 {
-                    if (playerAccount != null && ValidateCharacterName(name))
+                    if (!ValidateCharacterName(name))
+                    {
+                        NAPI.Chat.SendChatMessageToPlayer(player, "Your name doesn't match the required format. Please enter something similar to John_Smith");
+                        return;
+                    }
+                    if (playerAccount != null)
                     {
                         Character newPlayerChar = new Character { CharacterName = name, AccountSocialClubId = playerAccount.SocialClubId, Age = 23, Gender = "M" };
                         characterService.CreateCharacter(newPlayerChar);
@@ -41,7 +46,7 @@ namespace ProjectFive.CharacterManager
                     }
                     else
                     {
-                        NAPI.Chat.SendChatMessageToPlayer(player, "There was an error processing your character. Check your name and attempt to log in again.");
+                        NAPI.Chat.SendChatMessageToPlayer(player, "There was an error processing your character.");
                     }
                 }
                 catch (Exception)
@@ -90,7 +95,7 @@ namespace ProjectFive.CharacterManager
 
         private bool ValidateCharacterName(String characterName)
         {
-            Regex regex = new Regex("[A-Z]{1}[a-z]{1,}_[A-Z]{1}[a-z]{1,}");
+            Regex regex = new Regex("^[A-Z]{1}[a-z]{1,}_[A-Z]{1}[a-z]{1,}$");
             return regex.IsMatch(characterName);
         }
 

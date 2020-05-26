@@ -25,6 +25,11 @@ namespace ProjectFive.DatabaseManager
 
             if (accountCreateTask.IsCompleted)
             {
+                if(accountCreateTask.Result == -1)
+                {
+                    return CreateDatabaseStatus.AccountAlreadyExists;
+                }
+
                 return CreateDatabaseStatus.AccountCreated;
             } else
             {
