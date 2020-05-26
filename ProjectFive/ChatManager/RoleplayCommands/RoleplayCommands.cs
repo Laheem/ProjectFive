@@ -21,7 +21,7 @@ namespace ProjectFive.ChatManager.RpCommands
         public void OnResourceStart()
         {
             // TODO - Re-enable this once characters are properly set up.
-            //NAPI.Server.SetGlobalServerChat(false);
+            NAPI.Server.SetGlobalServerChat(false);
         }
         
 
