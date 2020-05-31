@@ -6,46 +6,41 @@ using GTANetworkAPI;
 using ProjectFive.DatabaseManager;
 using BCrypt;
 using BCrypt.Net;
+using ProjectFive.Utils;
 
 namespace ProjectFive.AccountManager
 {
     class AccountsHandler : Script
     {
-        [ServerEvent(Event.ResourceStart)]
-        public void HandleAccountHandlerStart()
-        {
-            NAPI.Util.ConsoleOutput("[Account Handler] Account Handler has successfully booted up!");
-            using(var dbContext = new FiveDBContext())
-            {
-                dbContext.Database.EnsureCreated();
-                        NAPI.Util.ConsoleOutput($"There are {dbContext.Accounts.Count()} users created in the database!");
-                    }
-        }
+        readonly AccountService accountService = new AccountService();
 
         [Command("signup")]
         public void CreateAccount(Player player, String password)
         {
-            CreateDatabaseStatus returnedResult = createAccount(player, password);
+            Account newAccount = new Account {
+                Password = BCrypt.Net.BCrypt.HashPassword(password),
+                SocialClubId = player.SocialClubId,
+                SocialClubName = player.SocialClubName
+            };
 
-            switch (returnedResult)
+            switch (accountService.CreateAccount(newAccount))
             {
                 case CreateDatabaseStatus.AccountCreated:
-                    NAPI.Chat.SendChatMessageToPlayer(player, "Succesfully created your account!");
-                    return;
+                    NAPI.Chat.SendChatMessageToPlayer(player, "Your account was succesfully created.");
+                    break;
                 case CreateDatabaseStatus.AccountAlreadyExists:
-                    NAPI.Chat.SendChatMessageToPlayer(player, "Looks like your account already exists...");
-                    return;
+                    NAPI.Chat.SendChatMessageToPlayer(player, "You already have an account here!");
+                    break;
                 default:
-                    NAPI.Chat.SendChatMessageToPlayer(player, "An unknown error occured.");
-                    return;
+                    NAPI.Chat.SendChatMessageToPlayer(player, "An unknown error occured...");
+                    break;
             }
         }
 
         [Command("login",SensitiveInfo = true)]
         public void LoginUser(Player player, String password)
         {
-            LoginDatabaseStatus status;
-            Account playerAccount = LoginAccount(player.SocialClubId, password, out status);
+            Account playerAccount = accountService.LoginAccount(player.SocialClubId, password, out LoginDatabaseStatus status);
 
             switch (status)
             {
@@ -53,7 +48,8 @@ namespace ProjectFive.AccountManager
                     NAPI.Chat.SendChatMessageToPlayer(player, "That account doesn't exist.");
                     break;
                 case LoginDatabaseStatus.Success:
-                    NAPI.Chat.SendChatMessageToPlayer(player, $"Account logged in, welcome back {playerAccount.SocialClubId}");
+                    NAPI.Chat.SendChatMessageToPlayer(player, $"Account logged in, welcome back {playerAccount.SocialClubName}!");
+                    player.SetData<Account>(DataKeys.ACCOUNT_KEY, playerAccount);
                     break;
                 case LoginDatabaseStatus.IncorrectPassword:
                     NAPI.Chat.SendChatMessageToPlayer(player, "That password is incorrect.");
@@ -61,49 +57,6 @@ namespace ProjectFive.AccountManager
                 case LoginDatabaseStatus.UnknownError:
                     NAPI.Chat.SendChatMessageToPlayer(player, "An unknown error occured.");
                     break;
-                default:
-                    break;
-            }
-        }
-
-        public CreateDatabaseStatus createAccount(Player player, String password)
-        {
-           using(var dbContext = new FiveDBContext())
-            {
-                if(dbContext.Accounts.Find(player.SocialClubId) == null)
-                {
-                    Account newPlayerAccount = new Account { SocialClubId = player.SocialClubId, Password = BCrypt.Net.BCrypt.HashPassword(password)};
-                    dbContext.Accounts.Add(newPlayerAccount);
-                    dbContext.SaveChanges();
-                    return CreateDatabaseStatus.AccountCreated;
-                } else
-                {
-                    return CreateDatabaseStatus.AccountAlreadyExists;
-                }
-            }
-        }
-
-       
-        public Account LoginAccount(ulong socialClubID, String password, out LoginDatabaseStatus status )
-        {
-            using (var dbContext = new FiveDBContext())
-            {
-                Account targetAccount = dbContext.Accounts.Find(socialClubID);
-                if(targetAccount == null)
-                {
-                    status = LoginDatabaseStatus.AccountDoesntExist;
-                    return null;
-                }
-
-                if (BCrypt.Net.BCrypt.Verify(password, targetAccount.Password))
-                {
-                    status = LoginDatabaseStatus.Success;
-                    return targetAccount;
-                } else
-                {
-                    status = LoginDatabaseStatus.IncorrectPassword;
-                    return null;
-                }
             }
         }
     }

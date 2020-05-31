@@ -1,4 +1,5 @@
 ﻿using GTANetworkAPI;
+using ProjectFive.CharacterManager;
 using ProjectFive.ChatManager.MessageGenerator;
 using System;
 using System.Collections.Generic;
@@ -24,19 +25,24 @@ namespace ProjectFive.Utils
             }
         }
 
-        public static void SendMeMessage(Player player, String message, string colour)
+        public static void SendGenericChatMessage(Player player, Character character, String message)
         {
-            SendChatMessageToPlayersInRange(player, MessageGenerator.GenerateMeMessage(player.Name, message), distance: GENERIC_ROLEPLAY_COMMAND_DISTANCE, colour: colour);
+            SendChatMessageToPlayersInRange(player, MessageGenerator.GenerateGenericMessage(character.GetDisplayName(), message));
         }
 
-        public static void SendDoMessage(Player player, String message, string colour)
+        public static void SendMeMessage(Player player, Character character, String message, string colour)
         {
-            SendChatMessageToPlayersInRange(player, MessageGenerator.GenerateDoMessage(player.Name, message), distance: GENERIC_ROLEPLAY_COMMAND_DISTANCE, colour: colour);
+            SendChatMessageToPlayersInRange(player, MessageGenerator.GenerateMeMessage(character.GetDisplayName(), message), distance: GENERIC_ROLEPLAY_COMMAND_DISTANCE, colour: colour);
         }
 
-        public static void SendAttemptMessage(Player player, String action, String colour)
+        public static void SendDoMessage(Player player, Character character, String message, string colour)
         {
-            SendChatMessageToPlayersInRange(player, MessageGenerator.GenerateAttemptMessage(player.Name, action), distance: GENERIC_ROLEPLAY_COMMAND_DISTANCE, colour: colour);
+            SendChatMessageToPlayersInRange(player, MessageGenerator.GenerateDoMessage(character.GetDisplayName(), message), distance: GENERIC_ROLEPLAY_COMMAND_DISTANCE, colour: colour);
+        }
+
+        public static void SendAttemptMessage(Player player, Character character, String action, String colour)
+        {
+            SendChatMessageToPlayersInRange(player, MessageGenerator.GenerateAttemptMessage(character.GetDisplayName(), action), distance: GENERIC_ROLEPLAY_COMMAND_DISTANCE, colour: colour);
         }
 
         public static void SendChatMessageToPlayerById(Player sender, int targetPlayerId, string colour = "~w~")
@@ -46,6 +52,7 @@ namespace ProjectFive.Utils
 
         public static void SendPrivateMessageToPlayerByName(Player sender, string targetPlayerName, string message, string colour = "~w~")
         {
+            // TODO - Create method of matching char names.
             Player targetPlayer = NAPI.Player.GetPlayerFromName(targetPlayerName);
             if(targetPlayer != null)
             {
@@ -59,6 +66,7 @@ namespace ProjectFive.Utils
 
         public static void SendRpMessageToPlayerByName(Player sender, string targetPlayerName, string message, string colour = "~w~")
         {
+            // TODO - Create method of matching char names.
             Player targetPlayer = NAPI.Player.GetPlayerFromName(targetPlayerName);
             if (targetPlayer != null)
             {
@@ -72,6 +80,7 @@ namespace ProjectFive.Utils
 
         public static void SendWhisperToPlayerByName(Player sender, string targetPlayerName, string message, string colour = "~w~")
         {
+            // TODO - Create method of matching char names.
             Player targetPlayer = NAPI.Player.GetPlayerFromName(targetPlayerName);
             if (targetPlayer != null)
             {
@@ -90,19 +99,19 @@ namespace ProjectFive.Utils
             NAPI.Chat.SendChatMessageToPlayer(sender, "That player doesn't exist or is offline.");
         }
 
-        public static void SendShout(Player sender, string message)
+        public static void SendShout(Player sender, Character character, string message)
         {
-            ChatUtils.SendChatMessageToPlayersInRange(sender, MessageGenerator.GenerateShoutMessage(sender.Name,message), distance: GENERIC_SHOUT_DISTANCE);
+            ChatUtils.SendChatMessageToPlayersInRange(sender, MessageGenerator.GenerateShoutMessage(character.GetDisplayName(), message), distance: GENERIC_SHOUT_DISTANCE);
         }
 
-        public static void SendLow(Player sender, string message, string colour)
+        public static void SendLow(Player sender, Character character, string message, string colour)
         {
-            ChatUtils.SendChatMessageToPlayersInRange(sender, MessageGenerator.GenerateLowMessage(sender.Name, message), distance: WHISPER_DISTANCE, colour: colour);
+            ChatUtils.SendChatMessageToPlayersInRange(sender, MessageGenerator.GenerateLowMessage(character.GetDisplayName(), message), distance: WHISPER_DISTANCE, colour: colour);
         }
 
-        public static void SendB(Player sender, string message, string colour)
+        public static void SendB(Player sender, Character character, string message, string colour)
         {
-            ChatUtils.SendChatMessageToPlayersInRange(sender, MessageGenerator.GenerateBMessage(sender.Name, message), colour: colour);
+            ChatUtils.SendChatMessageToPlayersInRange(sender, MessageGenerator.GenerateBMessage(character.GetDisplayName(), message), colour: colour);
         }
     }
 }

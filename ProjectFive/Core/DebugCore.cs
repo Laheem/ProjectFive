@@ -86,5 +86,11 @@ namespace ProjectFive
                 NAPI.Chat.SendChatMessageToPlayer(player, "USAGE: /goto x y z");
             }
         }
+
+        [Command("g",GreedyArg = true)]
+        public void GlobalChat(Player player, String message)
+        {
+            NAPI.Chat.SendChatMessageToAll($"{player.Name}: {message}");
+        }
     }
 }

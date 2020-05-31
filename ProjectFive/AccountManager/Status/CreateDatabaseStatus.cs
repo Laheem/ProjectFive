@@ -1,4 +1,4 @@
-﻿enum CreateDatabaseStatus
+﻿public enum CreateDatabaseStatus
 {
     AccountCreated,
     AccountAlreadyExists,
