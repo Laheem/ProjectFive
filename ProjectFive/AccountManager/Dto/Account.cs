@@ -13,6 +13,8 @@ namespace ProjectFive.AccountManager
         public ulong SocialClubId { get; set; }
         public bool IsAdmin { get; set; } = false;
         public bool IsDev { get; set; } = false;
+        public bool IsHeadDev { get; set; }
+        public bool IsHeadNarrative { get; set; }
         public bool IsVip { get; set; } = false;
         public bool IsBanned { get; set; } = false;
         public String Password { get; set; }
@@ -22,9 +24,10 @@ namespace ProjectFive.AccountManager
         public DateTime? VipExpiration { get; set; }
         public int VipTokens { get; set; }
         public String SocialClubName { get; set; }
+        public int AdminLevel { get; set; } = -1;
 
 
-        public String getRemainingDaysOfVip()
+        public String GetRemainingDaysOfVip()
         {
             if(VipExpiration == null)
             {

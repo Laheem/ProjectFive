@@ -17,7 +17,7 @@ namespace ProjectFive.DatabaseManager
                 accountCreateTask.Wait(TimeSpan.FromSeconds(20));
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
                 return CreateDatabaseStatus.ErrorOccured;
@@ -25,7 +25,7 @@ namespace ProjectFive.DatabaseManager
 
             if (accountCreateTask.IsCompleted)
             {
-                if(accountCreateTask.Result == -1)
+                if (accountCreateTask.Result == -1)
                 {
                     return CreateDatabaseStatus.AccountAlreadyExists;
                 }
@@ -35,6 +35,27 @@ namespace ProjectFive.DatabaseManager
             {
                 return CreateDatabaseStatus.ErrorOccured;
             }
+        }
+
+        public bool UpdateAccount(Account account)
+        {
+            Task<int> accountUpdateTask = accountRepo.UpdateAccount(account);
+            try
+            {
+                accountUpdateTask.Wait(TimeSpan.FromSeconds(20));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+
+            if (accountUpdateTask.IsCompleted)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public Account LoginAccount(ulong socialClubID, String password, out LoginDatabaseStatus status)

@@ -35,10 +35,10 @@ namespace ProjectFive.DatabaseManager.Repository
             try
             {
                 using var dbContext = new FiveDBContext();
-                var databaseAccount = await dbContext.Accounts.FindAsync(accountToUpdate).ConfigureAwait(false);
+                var databaseAccount = await dbContext.Accounts.FindAsync(accountToUpdate.SocialClubId).ConfigureAwait(false);
                 if (databaseAccount != default)
                 {
-                    dbContext.Update(accountToUpdate);
+                    dbContext.Entry(databaseAccount).CurrentValues.SetValues(accountToUpdate);
                     return await dbContext.SaveChangesAsync().ConfigureAwait(false);
                 }
                 return 0;

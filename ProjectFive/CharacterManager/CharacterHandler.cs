@@ -107,7 +107,7 @@ namespace ProjectFive.CharacterManager
             NAPI.Chat.SendChatMessageToPlayer(player, $"{character.CharacterName} | Age: {character.Age} | Race: Placeholder | Money: ${character.Money} | Bank Money: $3");
             NAPI.Chat.SendChatMessageToPlayer(player, "Job: Placeholder | Faction: Vimto Syndacrips | Rank: Original Fizzy (10)");
             NAPI.Chat.SendChatMessageToPlayer(player, "Houses: None | Businesses: 23, 222");
-            NAPI.Chat.SendChatMessageToPlayer(player, $"Playing Hours : {character.PlayingHours} | Rank: very cool | VIP: {playerAccount.VipLevel} | VIP Expiration : {playerAccount.getRemainingDaysOfVip()}");
+            NAPI.Chat.SendChatMessageToPlayer(player, $"Playing Hours : {character.PlayingHours} | Rank: very cool | VIP: {playerAccount.VipLevel} | VIP Expiration : {playerAccount.GetRemainingDaysOfVip()}");
             NAPI.Chat.SendChatMessageToPlayer(player, new string('-', 90));
 
         }
