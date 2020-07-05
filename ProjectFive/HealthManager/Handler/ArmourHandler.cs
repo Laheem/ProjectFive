@@ -23,7 +23,7 @@ namespace ProjectFive.HealthManager
         [Command("setarmour", Alias = "sarm")]
         public void GiveArmour(Player player, String targetPlayer, String armourAmount)
         {
-                armourController.AdminSetPlayerArmour(player, targetPlayer, armourNumber);
+                armourController.AdminSetPlayerArmour(player, targetPlayer, armourAmount);
         }
 
 
