@@ -16,13 +16,6 @@ namespace ProjectFive.HealthManager.Service
         CharacterEntityService characterEntityService = new CharacterEntityService();
         AccountEntityService accountEntityService = new AccountEntityService();
 
-
-        [ServerEvent(Event.PlayerDisconnected)]
-        private void SaveLastArmourAmount(Player player)
-        {
-            SetCharacterArmour(player, player.Armor);
-        }
-
         public void SetPlayerArmour(Player player, ArmourType armourType)
         {
             Character targetChar = characterEntityService.GetCharacter(player);
