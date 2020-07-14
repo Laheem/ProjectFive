@@ -57,6 +57,21 @@ namespace ProjectFive.DatabaseManager.Service
             }
         }
 
+        public bool SaveCharacter(Character character)
+        {
+            Task<int> characterCreateTask = characterRepository.UpdateCharacter(character);
+            try
+            {
+                characterCreateTask.Wait(TimeSpan.FromSeconds(20));
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public List<Character> GetAllCharacters(Account account)
         {
             Task<List<Character>> getAllCharactersTask = characterRepository.GetAllCharactersForAccount(account);

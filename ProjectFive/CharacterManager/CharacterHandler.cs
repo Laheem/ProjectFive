@@ -16,7 +16,6 @@ namespace ProjectFive.CharacterManager
         private CharacterEntityService characterEntityService = new CharacterEntityService();
 
         public event EventHandler CharacterLoggedIn;
-
         protected virtual void OnCharacterLoggedIn(CharacterLogInArgs e)
         {
             EventHandler handler = CharacterLoggedIn;
