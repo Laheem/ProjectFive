@@ -15,10 +15,16 @@ namespace ProjectFive.CharacterManager
         private CharacterService characterService = new CharacterService();
         private CharacterEntityService characterEntityService = new CharacterEntityService();
 
-        public event EventHandler CharacterLoggedIn;
+        // TODO - FIX THIS UGLY HACK - Static events bad but not too sure of another way...
+        public static event EventHandler CharacterLoggedIn;
+
         protected virtual void OnCharacterLoggedIn(CharacterLogInArgs e)
         {
             EventHandler handler = CharacterLoggedIn;
+            if(handler == null)
+            {
+                NAPI.Chat.SendChatMessageToAll("still null");
+            }
             handler?.Invoke(this, e);
         }
 

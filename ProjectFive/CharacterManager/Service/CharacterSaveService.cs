@@ -13,15 +13,15 @@ namespace ProjectFive.CharacterManager.Service
     {
         CharacterEntityService characterEntityService = new CharacterEntityService();
         CharacterService characterService = new CharacterService();
-        CharacterHandler characterHandler = new CharacterHandler();
-        
+
         public CharacterSaveService()
         {
-            CharacterHandler characterHandler = new CharacterHandler();
-            characterHandler.CharacterLoggedIn += CharacterHandler_CharacterLoggedIn;
+            CharacterHandler.CharacterLoggedIn += CharacterHandler_CharacterLoggedIn;
+           
         }
 
-        private void CharacterHandler_CharacterLoggedIn(object sender, EventArgs e)
+
+        public void CharacterHandler_CharacterLoggedIn(object sender, EventArgs e)
         {
             var characterLogInArgs = (CharacterLogInArgs)e;
             var targetPlayer = characterLogInArgs.client;
