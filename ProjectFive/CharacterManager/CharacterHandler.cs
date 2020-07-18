@@ -21,10 +21,6 @@ namespace ProjectFive.CharacterManager
         protected virtual void OnCharacterLoggedIn(CharacterLogInArgs e)
         {
             EventHandler handler = CharacterLoggedIn;
-            if(handler == null)
-            {
-                NAPI.Chat.SendChatMessageToAll("still null");
-            }
             handler?.Invoke(this, e);
         }
 

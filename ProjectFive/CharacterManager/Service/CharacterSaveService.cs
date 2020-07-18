@@ -28,6 +28,7 @@ namespace ProjectFive.CharacterManager.Service
             var targetCharacter = characterLogInArgs.targetCharacter;
 
             targetPlayer.Armor = targetCharacter.Armour;
+            targetPlayer.Health = targetCharacter.Health;
 
         }
 

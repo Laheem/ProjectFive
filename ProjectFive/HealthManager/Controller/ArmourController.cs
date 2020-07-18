@@ -12,7 +12,6 @@ namespace ProjectFive.HealthManager.Service
 {
     class ArmourController : Script
     {
-
         CharacterEntityService characterEntityService = new CharacterEntityService();
         AccountEntityService accountEntityService = new AccountEntityService();
 

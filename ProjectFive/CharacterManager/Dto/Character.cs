@@ -20,6 +20,7 @@ namespace ProjectFive.CharacterManager
         public long Money { get; set; }
         public ulong AccountSocialClubId { get; set; }
         public int Armour { get; set; }
+        public int Health { get; set; }
 
         public String GetDisplayName()
         {
