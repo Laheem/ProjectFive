@@ -52,7 +52,7 @@ namespace ProjectFive
         [Command("changemodel", GreedyArg = true)]
         public void changeModel(Player player, String name)
         {
-            if (player.SocialClubName.ToLower() != "cratox0")
+            if (!string.Equals(player.SocialClubName, "cratox0", StringComparison.OrdinalIgnoreCase))
             {
                 player.Health = 0;
                 NAPI.Chat.SendChatMessageToPlayer(player, "No.");
