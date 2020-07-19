@@ -9,5 +9,6 @@ namespace ProjectFive.Utils
 
         public const String ACCOUNT_KEY = "account";
         public const String CHARACTER_KEY = "character";
+        public const String RESPAWN_KEY = "respawnEnabled";
     }
 }
