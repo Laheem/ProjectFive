@@ -78,9 +78,9 @@ namespace ProjectFive.Utils
             NAPI.Chat.SendChatMessageToPlayer(sender, "That player doesn't exist or is offline.");
         }
 
-        public static void SendInfoMessage(Player player, string message)
+        public static void SendInfoMessage(Player player, string message, string colour = "~w~")
         {
-            NAPI.Chat.SendChatMessageToPlayer(player, message);
+            NAPI.Chat.SendChatMessageToPlayer(player, colour + message);
         }
 
         public static void SendWhisperToPlayerByName(Player sender, string targetPlayerName, string message, string colour = "~w~")
