@@ -17,9 +17,7 @@ namespace ProjectFive.Utils
 
         private static void SendChatMessageToPlayersInRange(Player player, String message, double distance = GENERIC_CHAT_DISTANCE, string colour = "~w~")
         {
-            List<Player> allPlayersInRadius = NAPI.Player.GetPlayersInRadiusOfPlayer(distance, player);
-
-            foreach (var targetPlayer in allPlayersInRadius)
+            foreach (var targetPlayer in NAPI.Player.GetPlayersInRadiusOfPlayer(distance, player))
             {
                 NAPI.Chat.SendChatMessageToPlayer(targetPlayer, colour + message);
             }

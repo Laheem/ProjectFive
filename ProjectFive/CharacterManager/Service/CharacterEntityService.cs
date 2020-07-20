@@ -18,7 +18,7 @@ namespace ProjectFive.CharacterManager.Service
         public void SetCurrentCharacter(Player player, Character character)
         {
             player.SetData<Character>(DataKeys.CHARACTER_KEY, character);
-            player.Name = character.CharacterName;
+            NAPI.Player.SetPlayerName(player, character.CharacterName);
         }
 
         public bool HasSelectedCharacter(Player player)
