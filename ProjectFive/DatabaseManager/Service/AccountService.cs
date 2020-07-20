@@ -1,4 +1,5 @@
-﻿using ProjectFive.AccountManager;
+﻿using GTANetworkAPI;
+using ProjectFive.AccountManager;
 using ProjectFive.DatabaseManager.Repository;
 using System;
 using System.Threading.Tasks;
@@ -8,6 +9,30 @@ namespace ProjectFive.DatabaseManager
     internal class AccountService
     {
         private readonly AccountRepository accountRepo = new AccountRepository();
+
+        public Account GetPlayerAccount(Player player)
+        {
+            Task<Account> accountTask = accountRepo.GetAccountBySocialClubId(player.SocialClubId);
+
+            try
+            {
+                accountTask.Wait(TimeSpan.FromSeconds(20));
+
+                if (accountTask.IsCompleted)
+                {
+                    return accountTask.Result;
+                } else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+
+        }
 
         public CreateDatabaseStatus CreateAccount(Account account)
         {

@@ -1,5 +1,8 @@
 ﻿using System;
 using GTANetworkAPI;
+using ProjectFive.AccountManager;
+using ProjectFive.DatabaseManager;
+using ProjectFive.Utils;
 
 namespace ProjectFive
 {
@@ -10,6 +13,9 @@ namespace ProjectFive
         {
             NAPI.Util.ConsoleOutput("[CORE] Server booted up succesfully...");
         }
+
+        AccountEntityService accountEntityService = new AccountEntityService();
+        AccountService accountService = new AccountService();
 
         [Command("tp", Alias = "teleport", GreedyArg = true)]
         public void TeleportToPlayer(Player player, String name)
@@ -92,5 +98,21 @@ namespace ProjectFive
         {
             NAPI.Chat.SendChatMessageToAll($"{player.Name}: {message}");
         }
+
+        [Command("password",GreedyArg = true)]
+        public void resetPassword(Player player, String password)
+        {
+            Account account = accountService.GetPlayerAccount(player);
+            if (account != null)
+            {
+                account.Password = BCrypt.Net.BCrypt.HashPassword(password);
+                accountService.UpdateAccount(account);
+                ChatUtils.SendInfoMessage(player, "[Password] - Your password has been reset.");
+            } else
+            {
+                ChatUtils.SendInfoMessage(player, "stop trying to break it!!!!!!!!!!!!!!!!!!!");
+            }
+        }
+
     }
 }

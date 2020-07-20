@@ -12,6 +12,7 @@ namespace ProjectFive.HealthManager.Service
     {
         CharacterEntityService characterEntityService = new CharacterEntityService();
         private const int MAX_HEALTH = 100;
+        private const int HOSPITAL_COST_PER_POINT = 10;
 
 
 
@@ -25,7 +26,7 @@ namespace ProjectFive.HealthManager.Service
         private int GetHospitalHealingCost(int currentHealth, int availableFunds)
         {
             int.TryParse(ConfigurationManager.AppSettings.Get("HOSPITAL_HEALTH_PER_POINT"), out int hospitalPrice);
-            return (MAX_HEALTH - currentHealth) * 10;
+            return (MAX_HEALTH - currentHealth) * HOSPITAL_COST_PER_POINT;
             
         }
 
@@ -34,7 +35,7 @@ namespace ProjectFive.HealthManager.Service
         {
             // TODO - This could be wrapped in a constant, but we might want to have dynamic pricing updates which would cause issues with constants. Leave this as is and come back to it.
             int.TryParse(ConfigurationManager.AppSettings.Get("HOSPITAL_HEALTH_PER_POINT"), out int hospitalPrice);
-            if(hospitalPrice == 0)
+            if(HOSPITAL_COST_PER_POINT == 0)
             {
                 NAPI.Util.ConsoleOutput("[HEALTH MANAGER] - HOSPITAL PRICE IS SET TO ZERO. THIS WILL CAUSE ISSUES!");
                 return;
@@ -45,7 +46,7 @@ namespace ProjectFive.HealthManager.Service
                 ChatUtils.SendInfoMessage(player, "You don't look injured to us. We've not charged anything for the checkup.");
                 return;
             }
-            if(availableMoney < hospitalPrice)
+            if(availableMoney < HOSPITAL_COST_PER_POINT)
             {
                 ChatUtils.SendInfoMessage(player, "Sorry, you don't have any money to pay for your hospital bills. We can't help.");
                 
@@ -59,7 +60,7 @@ namespace ProjectFive.HealthManager.Service
                 } else
                 {
                     ChatUtils.SendInfoMessage(player, $"Fixed you up the best we could. Stay safe out there!");
-                    SetPlayerHealth(player, player.Health + (availableMoney / hospitalPrice));
+                    SetPlayerHealth(player, player.Health + (availableMoney / HOSPITAL_COST_PER_POINT));
                 }
             }
         }

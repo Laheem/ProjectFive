@@ -14,6 +14,7 @@ namespace ProjectFive.HealthManager
         [Command("heal")]
         public void HealCommand(Player player, String amountPaid)
         {
+            healthController.HospitalHeal(player, int.Parse(amountPaid));
         }
     }
 }

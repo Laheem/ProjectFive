@@ -39,6 +39,7 @@ namespace ProjectFive.CharacterManager.Service
             if (playerChar != null)
             {
                 playerChar.Armour = player.Armor;
+                playerChar.Health = player.Health;
                 characterService.SaveCharacter(playerChar);
             }
         }
