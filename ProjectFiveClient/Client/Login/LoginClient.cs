@@ -16,6 +16,12 @@ namespace ProjectFiveClient.Login
             RAGE.Events.Add("loginSuccess", destroyLoginBrowser);
             RAGE.Events.Add("loginFailed", onLoginFailure);
             RAGE.Events.Add("login", createLoginBrowser);
+            RAGE.Events.Add("attemptLogin", onPasswordSubmitted);
+        }
+
+        private void onPasswordSubmitted(object[] args)
+        {
+            RAGE.Events.CallRemote("attemptLogin", args[0]);
         }
 
         private void onLoginFailure(object[] args)
@@ -30,7 +36,6 @@ namespace ProjectFiveClient.Login
             browser.Active = true;
             RAGE.Ui.Cursor.Visible = true;
             Player.LocalPlayer.FreezePosition(true);
-            setLoginCamera();
 
         }
 
@@ -40,17 +45,16 @@ namespace ProjectFiveClient.Login
             attachCameraBackToPlayer();
             if(browser != null)
             {
+                RAGE.Ui.Cursor.Visible = false;
                 browser.Destroy();
             }
         }
 
         public void setLoginCamera()
         {
-            loginCamera = RAGE.Game.Cam.CreateCameraWithParams(01, -587.90314f, 712.3231f, 187.77089f, 180, 180, 160, 2, false, 0);
+            loginCamera = RAGE.Game.Cam.CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", -587.90314f, 712.3231f, 187.77089f, 180, 180, 160, 2, false, 1);
             RAGE.Game.Cam.SetCamActive(loginCamera, true);
-            RAGE.Game.Cam.SetCamFov(loginCamera, 5.0f);
-            RAGE.Game.Cam.RenderScriptCams(true, false, 0, true, true, loginCamera);
-
+            RAGE.Game.Cam.SetCamFov(loginCamera, 60.0f);
         }
 
         public void attachCameraBackToPlayer()

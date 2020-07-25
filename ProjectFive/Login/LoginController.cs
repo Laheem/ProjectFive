@@ -1,9 +1,12 @@
 ﻿using GTANetworkAPI;
 using ProjectFive.AccountManager;
+using ProjectFive.CharacterManager;
 using ProjectFive.DatabaseManager;
+using ProjectFive.DatabaseManager.Service;
 using ProjectFive.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ProjectFive.Login
@@ -12,6 +15,12 @@ namespace ProjectFive.Login
     {
 
         AccountService accountService = new AccountService();
+        AccountEntityService accountEntityService = new AccountEntityService();
+
+        // TODO - Extract login features from handler...
+        CharacterHandler characterHandler = new CharacterHandler();
+        CharacterService characterService = new CharacterService();
+
 
         [ServerEvent(Event.ResourceStart)]
         public void DisableUserSpawn()
@@ -28,22 +37,16 @@ namespace ProjectFive.Login
             player.Transparency = 0;
         }
 
-        [Command("letsgo")]
-        public void letsgo(Player player)
-        {
-            NAPI.ClientEvent.TriggerClientEvent(player, "login");
-            player.Transparency = 0;
-        }
 
-        public void onSignInSuccessful(Player player)
+        public void onSignInSuccessful(Player player, List<String> characterNames)
         {
-            NAPI.ClientEvent.TriggerClientEvent(player, "loginSuccess");
+            String jsonList = NAPI.Util.ToJson(characterNames);
+            NAPI.ClientEvent.TriggerClientEvent(player, "loginSuccess", jsonList);
         }
 
         public void onFailedSignIn(Player player)
         {
-            NAPI.ClientEvent.TriggerClientEvent(player, "loginFailed", player.SocialClubId, player.SocialClubName);
-
+            ChatUtils.SendInfoMessage(player, "Your password was wrong.");
         }
 
         [RemoteEvent("attemptLogin")]
@@ -51,11 +54,23 @@ namespace ProjectFive.Login
         {
             if (SignInAccount(player,args[0].ToString()))
             {
-                onSignInSuccessful(player);
+                Account playerAccount = accountEntityService.GetAccount(player);
+                onSignInSuccessful(player, characterService.GetAllCharacters(playerAccount).Select(c =>c.CharacterName).ToList());
             } else
             {
                 onFailedSignIn(player);
             }
+        }
+
+
+        [RemoteEvent("selectCharacter")]
+        public void onCharacterSelected(Player player, object[] args)
+        {
+            Account playerAccount = accountEntityService.GetAccount(player);
+            Character character = characterService.GetAllCharacters(playerAccount).First(c => c.CharacterName == args[0].ToString());
+            characterHandler.CharacterSelected(player, playerAccount, character);
+            player.Transparency = 255;
+
         }
 
 

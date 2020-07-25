@@ -70,9 +70,7 @@ namespace ProjectFive.CharacterManager
                 {
                     List<Character> allCharacters = characterService.GetAllCharacters(playerAccount);
                     Character chosenCharacter = allCharacters[selectedIndex - 1];
-                    characterEntityService.SetCurrentCharacter(player, chosenCharacter);
-                    NAPI.Chat.SendChatMessageToPlayer(player, $"You've selected {chosenCharacter.CharacterName}");
-                    OnCharacterLoggedIn(new CharacterLogInArgs(player, chosenCharacter, playerAccount));
+                    CharacterSelected(player, playerAccount, chosenCharacter);
                 }
                 catch
                 {
@@ -82,6 +80,13 @@ namespace ProjectFive.CharacterManager
             {
                 NAPI.Chat.SendChatMessageToPlayer(player,"Log in!");
             }
+        }
+
+        public void CharacterSelected(Player player, Account playerAccount, Character chosenCharacter)
+        {
+            characterEntityService.SetCurrentCharacter(player, chosenCharacter);
+            NAPI.Chat.SendChatMessageToPlayer(player, $"You've selected {chosenCharacter.CharacterName}");
+            OnCharacterLoggedIn(new CharacterLogInArgs(player, chosenCharacter, playerAccount));
         }
 
         [Command("stats")]

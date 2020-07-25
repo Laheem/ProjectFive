@@ -29,6 +29,7 @@ namespace ProjectFive.CharacterManager.Service
 
             targetPlayer.Armor = targetCharacter.Armour;
             targetPlayer.Health = targetCharacter.Health;
+            targetPlayer.Position = new Vector3(targetCharacter.PositionX,targetCharacter.PositionY,targetCharacter.PositionZ);
 
         }
 
@@ -40,6 +41,10 @@ namespace ProjectFive.CharacterManager.Service
             {
                 playerChar.Armour = player.Armor;
                 playerChar.Health = player.Health;
+                playerChar.PositionX = player.Position.X;
+                playerChar.PositionY = player.Position.Y;
+                playerChar.PositionZ = player.Position.Z;
+
                 characterService.SaveCharacter(playerChar);
             }
         }
