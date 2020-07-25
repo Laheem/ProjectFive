@@ -15,5 +15,10 @@ namespace ProjectFive.DeathManager
             deathController.RespawnPlayer(player);
         }
 
+        [Command("forcerespawn")]
+        public void forceRespawnCommand(Player admin, String playerName)
+        {
+            deathController.AdminRespawn(admin, playerName);        }
+
     }
 }

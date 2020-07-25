@@ -5,6 +5,7 @@ using ProjectFive.CharacterManager;
 using ProjectFive.CharacterManager.Service;
 using ProjectFive.Utils;
 using Newtonsoft.Json;
+using ProjectFive.AdminManager;
 
 namespace ProjectFive.HealthManager.Service
 {
@@ -28,6 +29,23 @@ namespace ProjectFive.HealthManager.Service
             int.TryParse(ConfigurationManager.AppSettings.Get("HOSPITAL_HEALTH_PER_POINT"), out int hospitalPrice);
             return (MAX_HEALTH - currentHealth) * HOSPITAL_COST_PER_POINT;
             
+        }
+            
+        public void AdminHeal(Player admin, string playerName, int amount)
+        {
+            if (AdminUtils.isAdminAndCorrectLevel(admin, 1))
+            {
+                Player player = NAPI.Player.GetPlayerFromName(playerName);
+                if(player != null)
+                {
+                    SetPlayerHealth(player, amount);
+                    ChatUtils.SendInfoMessage(admin, $"Set {player.Name}'s health to ${amount}");
+                    ChatUtils.SendInfoMessage(player, $"Admin {admin.Name} set your health to {amount}");
+                } else
+                {
+                    ChatUtils.SendInfoMessage(admin, "That player does not exist.");
+                }
+            }
         }
 
         // TODO - Replace mock method.

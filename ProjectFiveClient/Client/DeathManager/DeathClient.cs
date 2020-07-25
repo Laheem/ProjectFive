@@ -19,13 +19,11 @@ namespace ProjectFiveClient.Client.DeathManager
 
         private void fadeInOnDeath(object[] args)
         {
-            RAGE.Chat.Output("AAAAAAAAAAB");
             RAGE.Game.Cam.DoScreenFadeIn(3000);
         }
 
         private void fadeOutOnDeath(object[] args)
         {
-            RAGE.Chat.Output("AAAAAAAAAAA");
             RAGE.Game.Cam.DoScreenFadeOut(2000);
         }
 
