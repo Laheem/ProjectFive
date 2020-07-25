@@ -23,7 +23,7 @@ namespace ProjectFive.DeathManager
 
             NAPI.Task.Run(() =>
             {
-                player.SetData<bool>(DataKeys.RESPAWN_KEY, true);
+                player.SetData(DataKeys.RESPAWN_KEY, true);
                 ChatUtils.SendInfoMessage(player, "You can now respawn!");
             }
             , delayTime: 20000);
@@ -38,9 +38,15 @@ namespace ProjectFive.DeathManager
             {
                 if (player.GetData<bool>(DataKeys.RESPAWN_KEY))
                 {
-                    NAPI.Player.SpawnPlayer(player, new Vector3(0, 50, 0));
-                    player.SetData<bool>(DataKeys.RESPAWN_KEY, false);
-                }
+                    NAPI.ClientEvent.TriggerClientEvent(player, "blackout");
+                    NAPI.Task.Run(() =>
+                    {
+                        NAPI.ClientEvent.TriggerClientEvent(player, "deathFadeIn");
+                        NAPI.Player.SpawnPlayer(player, new Vector3(0, 50, 0));
+                        player.SetData<bool>(DataKeys.RESPAWN_KEY, false);
+                    }
+                    , delayTime: 7000);
+                  }
                 else
                 {
                     ChatUtils.SendInfoMessage(player, "You're not able to respawn yet.");
