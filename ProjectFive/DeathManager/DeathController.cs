@@ -57,7 +57,7 @@ namespace ProjectFive.DeathManager
             NAPI.Task.Run(() =>
             {
                 NAPI.ClientEvent.TriggerClientEvent(player, "deathFadeIn");
-                NAPI.Player.SpawnPlayer(player, new Vector3(0, 50, 0));
+                NAPI.Player.SpawnPlayer(player, new Vector3(-587.90314, 712.3231, 187.77089),180);
                 player.SetData<bool>(DataKeys.RESPAWN_KEY, false);
             }
             , delayTime: 7000);
