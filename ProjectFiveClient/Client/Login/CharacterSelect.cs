@@ -9,6 +9,7 @@ namespace ProjectFiveClient.Client.Login
     class CharacterSelect : RAGE.Events.Script
     {
         private MenuPool _menuPool;
+        private bool isSelectingCharacter = false;
         public CharacterSelect()
         {
             RAGE.Events.Add("loginSuccess", onCharacterListSent);
@@ -27,10 +28,19 @@ namespace ProjectFiveClient.Client.Login
 
             AddCharacterButtons(characters, mainMenu);
             _menuPool.RefreshIndex();
+            isSelectingCharacter = true;
             mainMenu.Visible = true;
 
+            mainMenu.OnMenuClose += MainMenu_OnMenuClose;
         }
 
+        private void MainMenu_OnMenuClose(UIMenu sender)
+        {
+            if (isSelectingCharacter)
+            {
+                sender.Visible = true;
+            }
+        }
 
         private void AddCharacterButtons(List<string> characters, UIMenu targetMenu)
         {
@@ -53,17 +63,23 @@ namespace ProjectFiveClient.Client.Login
             sender.Visible = false;
             RAGE.Events.CallRemote("selectCharacter", selectedItem.Text);
             Player.LocalPlayer.FreezePosition(false);
+            isSelectingCharacter = false;
         }
 
         private void CreateCharacterButtonActivated(UIMenu sender, UIMenuItem selectedItem)
         {
             sender.Visible = false;
             RAGE.Events.CallLocal("createCharacter");
+            isSelectingCharacter = false;
         }
 
         void Tick(List<Events.TickNametagData> nametags)
         {
             _menuPool.ProcessMenus();
+            if (isSelectingCharacter)
+            {
+                RAGE.Game.Pad.DisableControlAction(32, 177, true);
+            }
         }
 
     }

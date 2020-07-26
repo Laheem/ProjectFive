@@ -33,7 +33,7 @@ namespace ProjectFive.Login
         public void onPlayerConnected(Player player)
         {
             NAPI.ClientEvent.TriggerClientEvent(player, "login", player.SocialClubId, player.SocialClubName);
-      
+            player.Dimension = 555;
             player.Transparency = 0;
         }
 
@@ -46,7 +46,7 @@ namespace ProjectFive.Login
 
         public void onFailedSignIn(Player player)
         {
-            ChatUtils.SendInfoMessage(player, "Your password was wrong.");
+            // TODO - Call client event here.
         }
 
         [RemoteEvent("attemptLogin")]
@@ -70,6 +70,7 @@ namespace ProjectFive.Login
             Character character = characterService.GetAllCharacters(playerAccount).First(c => c.CharacterName == args[0].ToString());
             characterHandler.CharacterSelected(player, playerAccount, character);
             player.Transparency = 255;
+            player.Dimension = 1;
 
         }
 

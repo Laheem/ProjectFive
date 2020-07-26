@@ -1,4 +1,5 @@
-﻿using RAGE.Elements;
+﻿using RAGE;
+using RAGE.Elements;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,9 +35,9 @@ namespace ProjectFiveClient.Login
             browser = new RAGE.Ui.HtmlWindow(LOGIN_FILE_PATH);
             browser.Active = true;
             RAGE.Ui.Cursor.Visible = true;
-            RAGE.Chat.Activate(true);
+            RAGE.Chat.Activate(false);
             Player.LocalPlayer.FreezePosition(true);
-
+            RAGE.Game.Player.SetPlayerControl(true, 0);
         }
 
 
