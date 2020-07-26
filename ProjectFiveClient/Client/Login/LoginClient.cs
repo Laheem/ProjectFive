@@ -34,7 +34,7 @@ namespace ProjectFiveClient.Login
             browser = new RAGE.Ui.HtmlWindow(LOGIN_FILE_PATH);
             browser.Active = true;
             RAGE.Ui.Cursor.Visible = true;
-            RAGE.Chat.Activate(false);
+            RAGE.Chat.Activate(true);
             Player.LocalPlayer.FreezePosition(true);
 
         }
