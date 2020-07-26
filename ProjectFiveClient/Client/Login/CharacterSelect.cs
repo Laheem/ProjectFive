@@ -54,6 +54,7 @@ namespace ProjectFiveClient.Client.Login
             {
                 UIMenuItem createACharacterItem = new UIMenuItem("Create a Character");
                 targetMenu.AddItem(createACharacterItem);
+                createACharacterItem.Activated += CreateCharacterButtonActivated;
 
             }
         }
