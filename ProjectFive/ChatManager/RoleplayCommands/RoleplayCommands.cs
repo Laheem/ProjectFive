@@ -20,7 +20,6 @@ namespace ProjectFive.ChatManager.RpCommands
         [ServerEvent(Event.ResourceStart)]
         public void OnResourceStart()
         {
-            // TODO - Re-enable this once characters are properly set up.
             NAPI.Server.SetGlobalServerChat(false);
         }
         
@@ -36,8 +35,6 @@ namespace ProjectFive.ChatManager.RpCommands
 
         }
 
-
-        // TODO - Change this to character when we get around to it.
         [Command("me", GreedyArg = true)]
         public void MeMessage(Player player, String message)
         {

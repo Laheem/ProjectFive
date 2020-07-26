@@ -10,7 +10,6 @@ using System.Text.RegularExpressions;
 
 namespace ProjectFive.CharacterManager
 {
-    // TODO - Rework this page to decouple. Some of this stuff should really be in seperate files...
     internal class CharacterController : Script
     {
         private CharacterService characterService = new CharacterService();

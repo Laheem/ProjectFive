@@ -17,7 +17,6 @@ namespace ProjectFive.Login
         AccountService accountService = new AccountService();
         AccountEntityService accountEntityService = new AccountEntityService();
 
-        // TODO - Extract login features from handler...
         CharacterController characterController = new CharacterController();
         CharacterService characterService = new CharacterService();
 

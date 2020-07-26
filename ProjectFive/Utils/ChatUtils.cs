@@ -50,7 +50,6 @@ namespace ProjectFive.Utils
 
         public static void SendPrivateMessageToPlayerByName(Player sender, string targetPlayerName, string message, string colour = "~w~")
         {
-            // TODO - Create method of matching char names.
             Player targetPlayer = NAPI.Player.GetPlayerFromName(targetPlayerName);
             if(targetPlayer != null)
             {
@@ -64,7 +63,6 @@ namespace ProjectFive.Utils
 
         public static void SendRpMessageToPlayerByName(Player sender, string targetPlayerName, string message, string colour = "~w~")
         {
-            // TODO - Create method of matching char names.
             Player targetPlayer = NAPI.Player.GetPlayerFromName(targetPlayerName);
             if (targetPlayer != null)
             {
@@ -83,7 +81,6 @@ namespace ProjectFive.Utils
 
         public static void SendWhisperToPlayerByName(Player sender, string targetPlayerName, string message, string colour = "~w~")
         {
-            // TODO - Create method of matching char names.
             Player targetPlayer = NAPI.Player.GetPlayerFromName(targetPlayerName);
             if (targetPlayer != null)
             {
