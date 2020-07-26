@@ -16,7 +16,7 @@ namespace ProjectFive.CharacterManager.Service
 
         public CharacterSaveService()
         {
-            CharacterHandler.CharacterLoggedIn += CharacterHandler_CharacterLoggedIn;
+            CharacterController.CharacterLoggedIn += CharacterHandler_CharacterLoggedIn;
            
         }
 

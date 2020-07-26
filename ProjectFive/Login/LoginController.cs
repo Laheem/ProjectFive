@@ -18,7 +18,7 @@ namespace ProjectFive.Login
         AccountEntityService accountEntityService = new AccountEntityService();
 
         // TODO - Extract login features from handler...
-        CharacterHandler characterHandler = new CharacterHandler();
+        CharacterController characterController = new CharacterController();
         CharacterService characterService = new CharacterService();
 
 
@@ -75,7 +75,7 @@ namespace ProjectFive.Login
         {
             Account playerAccount = accountEntityService.GetAccount(player);
             Character character = characterService.GetAllCharacters(playerAccount).First(c => c.CharacterName == args[0].ToString());
-            characterHandler.CharacterSelected(player, playerAccount, character);
+            characterController.CharacterSelected(player, playerAccount, character);
             player.Transparency = 255;
             player.Dimension = 1;
 
