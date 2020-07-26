@@ -31,10 +31,10 @@ namespace ProjectFiveClient.Login
 
         public void createLoginBrowser(object[] args)
         {
-            RAGE.Chat.Output("It looks like we're getting here...");
             browser = new RAGE.Ui.HtmlWindow(LOGIN_FILE_PATH);
             browser.Active = true;
             RAGE.Ui.Cursor.Visible = true;
+            RAGE.Chat.Activate(false);
             Player.LocalPlayer.FreezePosition(true);
 
         }
@@ -47,6 +47,7 @@ namespace ProjectFiveClient.Login
             {
                 RAGE.Ui.Cursor.Visible = false;
                 browser.Destroy();
+                RAGE.Chat.Activate(true);
             }
         }
 

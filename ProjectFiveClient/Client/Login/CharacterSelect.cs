@@ -18,7 +18,6 @@ namespace ProjectFiveClient.Client.Login
 
         private void onCharacterListSent(object[] args)
         {
-            RAGE.Chat.Output("The function works.");
             var bytes = RAGE.Util.MsgPack.ConvertFromJson((string)args[0]);
             List<string> characters = RAGE.Util.MsgPack.Deserialize<List<string>>(bytes);
             Point RIGHT_EDGE_OF_SCREEN = new Point(1400, 50);
