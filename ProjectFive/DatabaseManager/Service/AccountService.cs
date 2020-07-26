@@ -75,12 +75,7 @@ namespace ProjectFive.DatabaseManager
                 return false;
             }
 
-            if (accountUpdateTask.IsCompleted)
-            {
-                return true;
-            }
-
-            return false;
+            return accountUpdateTask.IsCompleted;
         }
 
         public Account LoginAccount(ulong socialClubID, String password, out LoginDatabaseStatus status)

@@ -53,11 +53,11 @@ namespace ProjectFive.HealthManager.Service
         {
             // TODO - This could be wrapped in a constant, but we might want to have dynamic pricing updates which would cause issues with constants. Leave this as is and come back to it.
             int.TryParse(ConfigurationManager.AppSettings.Get("HOSPITAL_HEALTH_PER_POINT"), out int hospitalPrice);
-            if(HOSPITAL_COST_PER_POINT == 0)
-            {
-                NAPI.Util.ConsoleOutput("[HEALTH MANAGER] - HOSPITAL PRICE IS SET TO ZERO. THIS WILL CAUSE ISSUES!");
-                return;
-            }
+            //if(HOSPITAL_COST_PER_POINT == 0)
+            //{
+            //    NAPI.Util.ConsoleOutput("[HEALTH MANAGER] - HOSPITAL PRICE IS SET TO ZERO. THIS WILL CAUSE ISSUES!");
+            //    return;
+            //}
             Character playerCharacter = characterEntityService.GetCharacter(player);
             if(player.Health >= 100)
             {

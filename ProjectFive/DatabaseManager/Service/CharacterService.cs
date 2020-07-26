@@ -1,4 +1,5 @@
-﻿using ProjectFive.AccountManager;
+﻿using GTANetworkAPI;
+using ProjectFive.AccountManager;
 using ProjectFive.CharacterManager;
 using ProjectFive.DatabaseManager.Repository;
 using System;
@@ -66,6 +67,7 @@ namespace ProjectFive.DatabaseManager.Service
             }
             catch (Exception e)
             {
+                NAPI.Util.ConsoleOutput(e.StackTrace);
                 return false;
             }
 

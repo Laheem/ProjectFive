@@ -13,7 +13,7 @@ namespace ProjectFive.Utils
         {
             NAPI.Chat.SendChatMessageToPlayer(player, player.Position.ToString());
     
-            if (send != null && send.ToLower() == "send")
+            if (send != null && string.Equals(send, "send", StringComparison.OrdinalIgnoreCase))
             {
                 using System.IO.StreamWriter file =
                     new System.IO.StreamWriter("locations.txt", true);
