@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using GTANetworkAPI;
+using GTANetworkMethods;
+using Player = GTANetworkAPI.Player;
 
 namespace ProjectFive.VehicleManager
 {
@@ -25,7 +27,7 @@ namespace ProjectFive.VehicleManager
 
             NAPI.Task.Run(() =>
             {
-                Vehicle x = NAPI.Vehicle.CreateVehicle(targetVehicle, player.Position, 0f, 1, 1);
+                GTANetworkAPI.Vehicle x = NAPI.Vehicle.CreateVehicle(targetVehicle, player.Position, 0f, 1, 1);
                 x.Dimension = player.Dimension;
                 x.Locked = false;
                 NAPI.Entity.SetEntityPosition(x, player.Position);
@@ -37,6 +39,11 @@ namespace ProjectFive.VehicleManager
         public void getVeh(Player player)
         {
             NAPI.Util.ConsoleOutput(NAPI.Pools.GetAllVehicles().Count.ToString());
+            foreach(var veh in NAPI.Pools.GetAllVehicles())
+            {
+                NAPI.Util.ConsoleOutput($" VEHICLE LOCATION - {veh.Position} IN DIMENSION {veh.Dimension}");
+            }
+          
         }
     }
 }
