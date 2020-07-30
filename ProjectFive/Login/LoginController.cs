@@ -76,7 +76,7 @@ namespace ProjectFive.Login
             Character character = characterService.GetAllCharacters(playerAccount).First(c => c.CharacterName == args[0].ToString());
             characterController.CharacterSelected(player, playerAccount, character);
             player.Transparency = 255;
-            player.Dimension = 1;
+            player.Dimension = 0;
 
         }
 
