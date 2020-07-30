@@ -25,7 +25,7 @@ namespace ProjectFive.VehicleManager
 
             NAPI.Task.Run(() =>
             {
-                Vehicle x = NAPI.Vehicle.CreateVehicle(targetVehicle, player.Position, new float(), 1, 1);
+                Vehicle x = NAPI.Vehicle.CreateVehicle(targetVehicle, player.Position, 0f, 1, 1);
                 x.Dimension = player.Dimension;
                 x.Locked = false;
                 NAPI.Entity.SetEntityPosition(x, player.Position);
