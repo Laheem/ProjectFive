@@ -30,7 +30,7 @@ namespace ProjectFive.VehicleManager
                 x.Locked = false;
                 NAPI.Entity.SetEntityPosition(x, player.Position);
                 NAPI.Player.SetPlayerIntoVehicle(player, x, 0);
-            });
+            }, delayTime: 500);
         }
 
         [Command("getveh")]
