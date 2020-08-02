@@ -31,7 +31,7 @@ namespace ProjectFive.Login
         [ServerEvent(Event.PlayerConnected)]
         public void onPlayerConnected(Player player)
         {
-            if(accountService.GetPlayerAccount(player) == null)
+            if(accountService.GetAccount(player) == null)
             {
                 ChatUtils.SendInfoMessage(player, "Normally you'd create an account here, but we haven't done that yet. Spawning you in! Please use /signup for now.");
                 NAPI.Player.SpawnPlayer(player, new Vector3(0, 0, 60));

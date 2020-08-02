@@ -74,6 +74,30 @@ namespace ProjectFive.DatabaseManager.Service
             return true;
         }
 
+        public Character GetCharacter(String characterName)
+        {
+            Task<Character> getCharacterTask = characterRepository.GetCharacterByName(characterName);
+
+            try
+            {
+                getCharacterTask.Wait(TimeSpan.FromSeconds(20));
+
+                if (getCharacterTask.IsCompleted)
+                {
+                    return getCharacterTask.Result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
         public List<Character> GetAllCharacters(Account account)
         {
             Task<List<Character>> getAllCharactersTask = characterRepository.GetAllCharactersForAccount(account);

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace ProjectFive.DatabaseManager
 {
+    // TODO - REFACTOR THIS TO STOP SWALLOWING EXCEPTIONS!
     internal class AccountService
     {
         private readonly AccountRepository accountRepo = new AccountRepository();
 
-        public Account GetPlayerAccount(Player player)
+        public Account GetAccount(Player player)
         {
             Task<Account> accountTask = accountRepo.GetAccountBySocialClubId(player.SocialClubId);
 
@@ -31,6 +32,30 @@ namespace ProjectFive.DatabaseManager
                 return null;
             }
 
+
+        }
+
+        public Account GetAccount(ulong socialClubId)
+        {
+            Task<Account> getAccountTask = accountRepo.GetAccountBySocialClubId(socialClubId);
+
+            try
+            {
+                getAccountTask.Wait(TimeSpan.FromSeconds(20));
+
+                if (getAccountTask.IsCompleted)
+                {
+                    return getAccountTask.Result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
 
         }
 

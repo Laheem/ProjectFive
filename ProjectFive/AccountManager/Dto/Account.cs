@@ -1,4 +1,5 @@
 ﻿using ProjectFive.CharacterManager;
+using ProjectFive.Migrations;
 using ProjectFive.StrikeManager.Dto;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace ProjectFive.AccountManager
         public int AdminLevel { get; set; } = -1;
         public List<Strike> Strikes { get; set; }
         public int StrikeLevel { get; set; }
+        public String AdminName { get; set; } = "Test Admin";
 
 
         public String GetRemainingDaysOfVip()

@@ -16,6 +16,7 @@ namespace ProjectFive.StrikeManager.Dto
         public string DeactivateReason { get; set; } = "";
         public string? VoidingAdminName { get; set; } = "";
         public ulong AccountSocialClubId { get; set; }
+        public bool OffenderAcknowledged { get; set; }
 
 
     }

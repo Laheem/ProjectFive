@@ -102,7 +102,7 @@ namespace ProjectFive
         [Command("password",GreedyArg = true)]
         public void resetPassword(Player player, String password)
         {
-            Account account = accountService.GetPlayerAccount(player);
+            Account account = accountService.GetAccount(player);
             if (account != null)
             {
                 account.Password = BCrypt.Net.BCrypt.HashPassword(password);

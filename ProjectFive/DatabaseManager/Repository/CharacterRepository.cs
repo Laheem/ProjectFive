@@ -94,5 +94,13 @@ namespace ProjectFive.DatabaseManager.Repository
                 throw;
             }
         }
+
+        public async Task<Character> GetCharacterByName(string CharacterName)
+        {
+           
+           using var dbContext = new FiveDBContext();
+           return await dbContext.Characters.FirstAsync(character => String.Equals(CharacterName,character.CharacterName,StringComparison.OrdinalIgnoreCase));
+            
+        }
     }
 }
