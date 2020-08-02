@@ -17,6 +17,7 @@ namespace ProjectFive.StrikeManager.Controller
         StrikeService strikeService = new StrikeService();
         CharacterService characterService = new CharacterService();
         AccountService accountService = new AccountService();
+        
 
         public void GiveStrikeOnlinePlayer(Player admin, Player offender, String reason)
         {
@@ -50,10 +51,13 @@ namespace ProjectFive.StrikeManager.Controller
             {
                 Account adminAccount = AccountUtils.GetAccount(admin);
                 Character offendingCharacter = characterService.GetCharacter(characterName);
-                Account offendingAccount = accountService.GetAccount(offendingCharacter.AccountSocialClubId);
-                StrikePlayer(reason, adminAccount, offendingAccount, false);
-
-
+                if (offendingCharacter != null)
+                {
+                    Account offendingAccount = accountService.GetAccount(offendingCharacter.AccountSocialClubId);
+                    StrikePlayer(reason, adminAccount, offendingAccount, false);
+                    ChatUtils.SendInfoMessage(admin, $"${offendingCharacter.CharacterName} was offline. Warning has been applied and they will be notified on next login.");
+                }
+                ChatUtils.SendInfoMessage(admin, "Couldn't find a character with that name, try again.");
             }
         }
     }
