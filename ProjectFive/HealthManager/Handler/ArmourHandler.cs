@@ -27,6 +27,8 @@ namespace ProjectFive.HealthManager
         }
 
 
+        // TODO - remove debug command.
+
         [Command("equiparmour")]
         public void EquipArmourDebug(Player player, String armourType)
         {

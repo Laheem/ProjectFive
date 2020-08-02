@@ -1,5 +1,5 @@
-﻿using MessagePack;
-using ProjectFive.CharacterManager;
+﻿using ProjectFive.CharacterManager;
+using ProjectFive.StrikeManager.Dto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,6 +25,8 @@ namespace ProjectFive.AccountManager
         public int VipTokens { get; set; }
         public String SocialClubName { get; set; }
         public int AdminLevel { get; set; } = -1;
+        public List<Strike> Strikes { get; set; }
+        public int StrikeLevel { get; set; }
 
 
         public String GetRemainingDaysOfVip()

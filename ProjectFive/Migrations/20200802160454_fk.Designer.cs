@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectFive.DatabaseManager;
 
 namespace ProjectFive.Migrations
 {
     [DbContext(typeof(FiveDBContext))]
-    partial class FiveDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200802160454_fk")]
+    partial class fk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,9 +55,6 @@ namespace ProjectFive.Migrations
                     b.Property<string>("SocialClubName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("StrikeLevel")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("VipExpiration")
                         .HasColumnType("datetime(6)");
 
@@ -72,34 +71,6 @@ namespace ProjectFive.Migrations
                     b.HasKey("SocialClubId");
 
                     b.ToTable("Accounts");
-                });
-
-            modelBuilder.Entity("ProjectFive.AccountManager.Dto.Strike", b =>
-                {
-                    b.Property<int>("StrikeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<ulong?>("AccountSocialClubId")
-                        .HasColumnType("bigint unsigned");
-
-                    b.Property<string>("AdminName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<DateTime>("ExpireTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("HasExpired")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Reason")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("StrikeId");
-
-                    b.HasIndex("AccountSocialClubId");
-
-                    b.ToTable("Strikes");
                 });
 
             modelBuilder.Entity("ProjectFive.CharacterManager.Character", b =>
@@ -147,6 +118,9 @@ namespace ProjectFive.Migrations
                     b.Property<string>("Race")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<ulong>("SocialClubId")
+                        .HasColumnType("bigint unsigned");
+
                     b.HasKey("CharacterId");
 
                     b.HasIndex("AccountSocialClubId");
@@ -154,16 +128,9 @@ namespace ProjectFive.Migrations
                     b.ToTable("Characters");
                 });
 
-            modelBuilder.Entity("ProjectFive.AccountManager.Dto.Strike", b =>
-                {
-                    b.HasOne("ProjectFive.AccountManager.Account", null)
-                        .WithMany("Strikes")
-                        .HasForeignKey("AccountSocialClubId");
-                });
-
             modelBuilder.Entity("ProjectFive.CharacterManager.Character", b =>
                 {
-                    b.HasOne("ProjectFive.AccountManager.Account", null)
+                    b.HasOne("ProjectFive.AccountManager.Account", "Account")
                         .WithMany("Characters")
                         .HasForeignKey("AccountSocialClubId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using Microsoft.Extensions.Options;
 using ProjectFive.CharacterManager;
+using ProjectFive.StrikeManager.Dto;
 
 namespace ProjectFive.DatabaseManager
 {
@@ -42,5 +43,6 @@ namespace ProjectFive.DatabaseManager
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Character> Characters { get; set; }
+        public DbSet<Strike> Strikes { get; set; }
     }
 }
