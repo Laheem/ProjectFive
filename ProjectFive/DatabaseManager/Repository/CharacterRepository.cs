@@ -35,7 +35,7 @@ namespace ProjectFive.DatabaseManager.Repository
             try
             {
                 using var dbContext = new FiveDBContext();
-                var databaseCharacter = await dbContext.Characters.FindAsync(characterToUpdate).ConfigureAwait(false);
+                var databaseCharacter = await dbContext.Characters.FindAsync(characterToUpdate.CharacterId).ConfigureAwait(false);
                 if (databaseCharacter != default)
                 {
                     dbContext.Entry(databaseCharacter).CurrentValues.SetValues(characterToUpdate);

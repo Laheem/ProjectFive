@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectFive.DatabaseManager;
 
 namespace ProjectFive.Migrations
 {
     [DbContext(typeof(FiveDBContext))]
-    partial class FiveDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200720170136_health")]
+    partial class health
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,15 +105,6 @@ namespace ProjectFive.Migrations
 
                     b.Property<int>("PlayingHours")
                         .HasColumnType("int");
-
-                    b.Property<float>("PositionX")
-                        .HasColumnType("float");
-
-                    b.Property<float>("PositionY")
-                        .HasColumnType("float");
-
-                    b.Property<float>("PositionZ")
-                        .HasColumnType("float");
 
                     b.Property<string>("Race")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");

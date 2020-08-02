@@ -17,9 +17,7 @@ namespace ProjectFive.Utils
 
         private static void SendChatMessageToPlayersInRange(Player player, String message, double distance = GENERIC_CHAT_DISTANCE, string colour = "~w~")
         {
-            List<Player> allPlayersInRadius = NAPI.Player.GetPlayersInRadiusOfPlayer(distance, player);
-
-            foreach (var targetPlayer in allPlayersInRadius)
+            foreach (var targetPlayer in NAPI.Player.GetPlayersInRadiusOfPlayer(distance, player))
             {
                 NAPI.Chat.SendChatMessageToPlayer(targetPlayer, colour + message);
             }
@@ -52,7 +50,6 @@ namespace ProjectFive.Utils
 
         public static void SendPrivateMessageToPlayerByName(Player sender, string targetPlayerName, string message, string colour = "~w~")
         {
-            // TODO - Create method of matching char names.
             Player targetPlayer = NAPI.Player.GetPlayerFromName(targetPlayerName);
             if(targetPlayer != null)
             {
@@ -66,7 +63,6 @@ namespace ProjectFive.Utils
 
         public static void SendRpMessageToPlayerByName(Player sender, string targetPlayerName, string message, string colour = "~w~")
         {
-            // TODO - Create method of matching char names.
             Player targetPlayer = NAPI.Player.GetPlayerFromName(targetPlayerName);
             if (targetPlayer != null)
             {
@@ -78,9 +74,13 @@ namespace ProjectFive.Utils
             NAPI.Chat.SendChatMessageToPlayer(sender, "That player doesn't exist or is offline.");
         }
 
+        public static void SendInfoMessage(Player player, string message, string colour = "~w~")
+        {
+            NAPI.Chat.SendChatMessageToPlayer(player, colour + message);
+        }
+
         public static void SendWhisperToPlayerByName(Player sender, string targetPlayerName, string message, string colour = "~w~")
         {
-            // TODO - Create method of matching char names.
             Player targetPlayer = NAPI.Player.GetPlayerFromName(targetPlayerName);
             if (targetPlayer != null)
             {

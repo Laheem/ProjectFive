@@ -85,99 +85,100 @@ namespace ProjectFiveClient.Client.Hud
         }
             private Dictionary<String,String> GenerateFullZoneDictionary()
             {
-                Dictionary<String, String> fullZoneNames = new Dictionary<String, String>();
-                fullZoneNames.Add("AIRP", "Los Santos International Airport");
-                fullZoneNames.Add("ALAMO", "Alamo Sea");
-                fullZoneNames.Add("ALTA", "Alta");
-                fullZoneNames.Add("ARMYB", "Fort Zancudo");
-                fullZoneNames.Add("BANHAMC", "Banham Canyon Dr");
-                fullZoneNames.Add("BANNING", "Banning");
-                fullZoneNames.Add("BEACH", "Vespucci Beach");
-                fullZoneNames.Add("BHAMCA", "Banham Canyon");
-                fullZoneNames.Add("BRADP", "Braddock Pass");
-                fullZoneNames.Add("BRADT", "Braddock Tunnel");
-                fullZoneNames.Add("BURTON", "Burton");
-                fullZoneNames.Add("CALAFB", "Calafia Bridge");
-                fullZoneNames.Add("CANNY", "Raton Canyon");
-                fullZoneNames.Add("CCREAK", "Cassidy Creek");
-                fullZoneNames.Add("CHAMH", "Chamberlain Hills");
-                fullZoneNames.Add("CHIL", "Vinewood Hills");
-                fullZoneNames.Add("CHU", "Chumash");
-                fullZoneNames.Add("CMSW", "Chiliad Mountain State Wilderness");
-                fullZoneNames.Add("CYPRE", "Cypress Flats");
-                fullZoneNames.Add("DAVIS", "Davis");
-                fullZoneNames.Add("DELBE", "Del Perro Beach");
-                fullZoneNames.Add("DELPE", "Del Perro");
-                fullZoneNames.Add("DELSOL", "La Puerta");
-                fullZoneNames.Add("DESRT", "Grand Senora Desert");
-                fullZoneNames.Add("DOWNT", "Downtown");
-                fullZoneNames.Add("DTVINE", "Downtown Vinewood");
-                fullZoneNames.Add("EAST_V", "East Vinewood");
-                fullZoneNames.Add("EBURO", "El Burro Heights");
-                fullZoneNames.Add("ELGORL", "El Gordo Lighthouse");
-                fullZoneNames.Add("ELYSIAN", "Elysian Island");
-                fullZoneNames.Add("GALFISH", "Galilee");
-                fullZoneNames.Add("GOLF", "GWC and Golfing Society");
-                fullZoneNames.Add("GRAPES", "Grapeseed");
-                fullZoneNames.Add("GREATC", "Great Chaparral");
-                fullZoneNames.Add("HARMO", "Harmony");
-                fullZoneNames.Add("HAWICK", "Hawick");
-                fullZoneNames.Add("HORS", "Vinewood Racetrack");
-                fullZoneNames.Add("HUMLAB", "Humane Labs and Research");
-                fullZoneNames.Add("JAIL", "Bolingbroke Penitentiary");
-                fullZoneNames.Add("KOREAT", "Little Seoul");
-                fullZoneNames.Add("LACT", "Land Act Reservoir");
-                fullZoneNames.Add("LAGO", "Lago Zancudo");
-                fullZoneNames.Add("LDAM", "Land Act Dam");
-                fullZoneNames.Add("LEGSQU", "Legion Square");
-                fullZoneNames.Add("LMESA", "La Mesa");
-                fullZoneNames.Add("LOSPUER", "La Puerta");
-                fullZoneNames.Add("MIRR", "Mirror Park");
-                fullZoneNames.Add("MORN", "Morningwood");
-                fullZoneNames.Add("MOVIE", "Richards Majestic");
-                fullZoneNames.Add("MTCHIL", "Mount Chiliad");
-                fullZoneNames.Add("MTGORDO", "Mount Gordo");
-                fullZoneNames.Add("MTJOSE", "Mount Josiah");
-                fullZoneNames.Add("MURRI", "Murrieta Heights");
-                fullZoneNames.Add("NCHU", "North Chumash");
-                fullZoneNames.Add("NOOSE", "N.O.O.S.E");
-                fullZoneNames.Add("OCEANA", "Pacific Ocean");
-                fullZoneNames.Add("OBSERV", "Galileo Observatory");
-                fullZoneNames.Add("PALCOV", "Paleto Cove");
-                fullZoneNames.Add("PALETO", "Paleto Bay");
-                fullZoneNames.Add("PALFOR", "Paleto Forest");
-                fullZoneNames.Add("PALHIGH", "Palomino Highlands");
-                fullZoneNames.Add("PALMPOW", "Palmer-Taylor Power Station");
-                fullZoneNames.Add("PBLUFF", "Pacific Bluffs");
-                fullZoneNames.Add("PBOX", "Pillbox Hill");
-                fullZoneNames.Add("PROCOB", "Procopio Beach");
-                fullZoneNames.Add("RANCHO", "Rancho");
-                fullZoneNames.Add("RGLEN", "Richman Glen");
-                fullZoneNames.Add("RICHM", "Richman");
-                fullZoneNames.Add("ROCKF", "Rockford Hills");
-                fullZoneNames.Add("RTRAK", "Redwood Lights Track");
-                fullZoneNames.Add("SANAND", "San Andreas");
-                fullZoneNames.Add("SANCHIA", "San Chianski Mountain Range");
-                fullZoneNames.Add("SANDY", "Sandy Shores");
-                fullZoneNames.Add("SKID", "Mission Row");
-                fullZoneNames.Add("SLAB", "Stab City");
-                fullZoneNames.Add("STAD", "Maze Bank Arena");
-                fullZoneNames.Add("STRAW", "Strawberry");
-                fullZoneNames.Add("TATAMO", "Tataviam Mountains");
-                fullZoneNames.Add("TERMINA", "Terminal");
-                fullZoneNames.Add("TEXTI", "Textile City");
-                fullZoneNames.Add("TONGVAH", "Tongva Hills");
-                fullZoneNames.Add("TONGVAV", "Tongva Valley");
-                fullZoneNames.Add("VCANA", "Vespucci Canals");
-                fullZoneNames.Add("VESP", "Vespucci");
-                fullZoneNames.Add("VINE", "Vinewood");
-                fullZoneNames.Add("WINDF", "Ron Alternates Wind Farm");
-                fullZoneNames.Add("WVINE", "West Vinewood");
-                fullZoneNames.Add("ZANCUDO", "Zancudo River");
-                fullZoneNames.Add("ZP_ORT", "Port of South Los Santos");
-                fullZoneNames.Add("ZQ_UAR", "Davis Quartz");
+            Dictionary<String, String> fullZoneNames = new Dictionary<String, String>
+            { { "AIRP", "Los Santos International Airport" },
+                { "ALAMO", "Alamo Sea" },
+                { "ALTA", "Alta" },
+                { "ARMYB", "Fort Zancudo" },
+                { "BANHAMC", "Banham Canyon Dr" },
+                { "BANNING", "Banning" },
+                { "BEACH", "Vespucci Beach" },
+                { "BHAMCA", "Banham Canyon" },
+                { "BRADP", "Braddock Pass" },
+                { "BRADT", "Braddock Tunnel" },
+                { "BURTON", "Burton" },
+                { "CALAFB", "Calafia Bridge" },
+                { "CANNY", "Raton Canyon" },
+                { "CCREAK", "Cassidy Creek" },
+                { "CHAMH", "Chamberlain Hills" },
+                { "CHIL", "Vinewood Hills" },
+                { "CHU", "Chumash" },
+                { "CMSW", "Chiliad Mountain State Wilderness" },
+                { "CYPRE", "Cypress Flats" },
+                { "DAVIS", "Davis" },
+                { "DELBE", "Del Perro Beach" },
+                { "DELPE", "Del Perro" },
+                { "DELSOL", "La Puerta" },
+                { "DESRT", "Grand Senora Desert" },
+                { "DOWNT", "Downtown" },
+                { "DTVINE", "Downtown Vinewood" },
+                { "EAST_V", "East Vinewood" },
+                { "EBURO", "El Burro Heights" },
+                { "ELGORL", "El Gordo Lighthouse" },
+                { "ELYSIAN", "Elysian Island" },
+                { "GALFISH", "Galilee" },
+                { "GOLF", "GWC and Golfing Society" },
+                { "GRAPES", "Grapeseed" },
+                { "GREATC", "Great Chaparral" },
+                { "HARMO", "Harmony" },
+                { "HAWICK", "Hawick" },
+                { "HORS", "Vinewood Racetrack" },
+                { "HUMLAB", "Humane Labs and Research" },
+                { "JAIL", "Bolingbroke Penitentiary" },
+                { "KOREAT", "Little Seoul" },
+                { "LACT", "Land Act Reservoir" },
+                { "LAGO", "Lago Zancudo" },
+                { "LDAM", "Land Act Dam" },
+                { "LEGSQU", "Legion Square" },
+                { "LMESA", "La Mesa" },
+                { "LOSPUER", "La Puerta" },
+                { "MIRR", "Mirror Park" },
+                { "MORN", "Morningwood" },
+                { "MOVIE", "Richards Majestic" },
+                { "MTCHIL", "Mount Chiliad" },
+                { "MTGORDO", "Mount Gordo" },
+                { "MTJOSE", "Mount Josiah" },
+                { "MURRI", "Murrieta Heights" },
+                { "NCHU", "North Chumash" },
+                { "NOOSE", "N.O.O.S.E" },
+                { "OCEANA", "Pacific Ocean" },
+                { "OBSERV", "Galileo Observatory" },
+                { "PALCOV", "Paleto Cove" },
+                { "PALETO", "Paleto Bay" },
+                { "PALFOR", "Paleto Forest" },
+                { "PALHIGH", "Palomino Highlands" },
+                { "PALMPOW", "Palmer-Taylor Power Station" },
+                { "PBLUFF", "Pacific Bluffs" },
+                { "PBOX", "Pillbox Hill" },
+                { "PROCOB", "Procopio Beach" },
+                { "RANCHO", "Rancho" },
+                { "RGLEN", "Richman Glen" },
+                { "RICHM", "Richman" },
+                { "ROCKF", "Rockford Hills" },
+                { "RTRAK", "Redwood Lights Track" },
+                { "SANAND", "San Andreas" },
+                { "SANCHIA", "San Chianski Mountain Range" },
+                { "SANDY", "Sandy Shores" },
+                { "SKID", "Mission Row" },
+                { "SLAB", "Stab City" },
+                { "STAD", "Maze Bank Arena" },
+                { "STRAW", "Strawberry" },
+                { "TATAMO", "Tataviam Mountains" },
+                { "TERMINA", "Terminal" },
+                { "TEXTI", "Textile City" },
+                { "TONGVAH", "Tongva Hills" },
+                { "TONGVAV", "Tongva Valley" },
+                { "VCANA", "Vespucci Canals" },
+                { "VESP", "Vespucci" },
+                { "VINE", "Vinewood" },
+                { "WINDF", "Ron Alternates Wind Farm" },
+                { "WVINE", "West Vinewood" },
+                { "ZANCUDO", "Zancudo River" },
+                { "ZP_ORT", "Port of South Los Santos" },
+                { "ZQ_UAR", "Davis Quartz" }
+            };
 
-                return fullZoneNames;
+            return fullZoneNames;
             }
         }
     }

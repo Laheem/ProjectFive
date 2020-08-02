@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectFive.DatabaseManager;
 
 namespace ProjectFive.Migrations
 {
     [DbContext(typeof(FiveDBContext))]
-    partial class FiveDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200716191136_CharArmour")]
+    partial class CharArmour
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,9 +94,6 @@ namespace ProjectFive.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("Health")
-                        .HasColumnType("int");
-
                     b.Property<string>("Job")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -103,15 +102,6 @@ namespace ProjectFive.Migrations
 
                     b.Property<int>("PlayingHours")
                         .HasColumnType("int");
-
-                    b.Property<float>("PositionX")
-                        .HasColumnType("float");
-
-                    b.Property<float>("PositionY")
-                        .HasColumnType("float");
-
-                    b.Property<float>("PositionZ")
-                        .HasColumnType("float");
 
                     b.Property<string>("Race")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");

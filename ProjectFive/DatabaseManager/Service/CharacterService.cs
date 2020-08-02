@@ -1,4 +1,5 @@
-﻿using ProjectFive.AccountManager;
+﻿using GTANetworkAPI;
+using ProjectFive.AccountManager;
 using ProjectFive.CharacterManager;
 using ProjectFive.DatabaseManager.Repository;
 using System;
@@ -55,6 +56,22 @@ namespace ProjectFive.DatabaseManager.Service
             {
                 return null;
             }
+        }
+
+        public bool SaveCharacter(Character character)
+        {
+            Task<int> characterCreateTask = characterRepository.UpdateCharacter(character);
+            try
+            {
+                characterCreateTask.Wait(TimeSpan.FromSeconds(20));
+            }
+            catch (Exception e)
+            {
+                NAPI.Util.ConsoleOutput(e.StackTrace);
+                return false;
+            }
+
+            return true;
         }
 
         public List<Character> GetAllCharacters(Account account)

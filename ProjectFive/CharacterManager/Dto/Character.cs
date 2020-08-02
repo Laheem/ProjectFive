@@ -1,4 +1,6 @@
-﻿using ProjectFive.AccountManager;
+﻿using GTANetworkAPI;
+using ProjectFive.AccountManager;
+using ProjectFive.HealthManager.Dto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,6 +20,12 @@ namespace ProjectFive.CharacterManager
         public int PlayingHours { get; set; }
         public long Money { get; set; }
         public ulong AccountSocialClubId { get; set; }
+        public int Armour { get; set; }
+        public int Health { get; set; }
+        public float PositionX { get; set; }
+        public float PositionY { get; set; }
+        public float PositionZ { get; set; }
+
 
         public String GetDisplayName()
         {
