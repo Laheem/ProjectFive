@@ -6,7 +6,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="MessagePack" Version="2.1.115" />
-		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 		<PackageReference Include="rage-sharp" Version="1.1.0-DP1-2" />
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0-preview.6.20305.6" />
 	</ItemGroup>
